@@ -66,7 +66,7 @@ public class Linklist {
        }
        head = prev;
     }
-
+//
     public static void main(String[] args) {
         Linklist list = new Linklist(new Node(1));
         list.add(new Node(2));
