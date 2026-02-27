@@ -72,6 +72,29 @@ public class Solution {
         return merge(leftSort,rightSort);
     }
 
+    //oddFront: odd num always in the front of list
+    //example: 1->2->3->4->null => 1->3->2->4->null
+    public static Linklist oddFront(Linklist list){
+        if(list.head == null || list.head.nxt == null) return list;
+        Linklist odd = new Linklist();
+        Linklist even = new Linklist();
+        Node cur = list.head;
+        while(cur != null){
+            if(cur.data % 2 == 0){
+                even.add(new Node(cur.data));
+            }else{
+                odd.add(new Node(cur.data));
+            }
+            cur = cur.nxt;
+        }
+        //connect odd->even
+        Node oddEnd = odd.head;
+        while(oddEnd.nxt != null){
+            oddEnd = oddEnd.nxt;
+        }
+        oddEnd.nxt = even.head;
+        return odd;
+    }
 
     public static void main(String[] args) {
         Linklist list = new Linklist(new Node(5));
@@ -79,6 +102,6 @@ public class Solution {
         list.add(new Node(4));
         list.add(new Node(5));
         list.add(new Node(1));
-        mergesort(list).print();
+        oddFront(list).print();
     }
 }
