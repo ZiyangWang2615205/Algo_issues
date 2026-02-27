@@ -66,15 +66,4 @@ public class Linklist {
        }
        head = prev;
     }
-//
-    public static void main(String[] args) {
-        Linklist list = new Linklist(new Node(1));
-        list.add(new Node(2));
-        list.add(new Node(3));
-        list.add(new Node(2));
-        list.print();
-        list.reverse();
-        System.out.println();
-        list.print();
-    }
 }
