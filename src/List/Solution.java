@@ -96,12 +96,70 @@ public class Solution {
         return odd;
     }
 
+    //resort: divide list based on mid and reverse latter. Then connect two list one by one.
+    //example: 1->2->3->4->5->null => 1->2->3 & 4->5 => 1->2->3 & 5->4 => 1->5->2->4->3->null
+    public static Node resort1(Linklist list){
+        if(list.head == null || list.head.nxt == null) return list.head;
+        //divide
+        Node mid = findMid(list);
+        Linklist left = new Linklist();
+        Linklist right = new Linklist();
+        Node cur = list.head;
+        while(cur != mid.nxt){
+            left.add(new Node(cur.data));
+            cur = cur.nxt;
+        }
+        right.head = cur;
+        //reverse right list
+        right.reverse();
+
+        Node lp = left.head;
+        Node rp = right.head;
+       while(rp != null){
+           Node l_next = lp.nxt;
+           Node r_next = rp.nxt;
+           //connect one by one
+           lp.nxt = rp;
+           rp.nxt = l_next;
+           lp = l_next;
+           rp = r_next;
+       }
+       return left.head;
+    }
+
+    public static Linklist resort(Linklist list){
+        if(list.head == null || list.head.nxt == null) return list;
+        Linklist res = new Linklist();
+        //divide
+        Node mid = findMid(list);
+        Linklist left = new Linklist();
+        Linklist right = new Linklist();
+        Node cur = list.head;
+        while(cur != mid.nxt){
+            left.add(new Node(cur.data));
+            cur = cur.nxt;
+        }
+        right.head = cur;
+        //reverse right list
+        right.reverse();
+        Node lp = left.head;
+        Node rp = right.head;
+        while(rp != null){
+            res.add(new Node(lp.data));
+            lp = lp.nxt;
+            res.add(new Node(rp.data));
+            rp = rp.nxt;
+        }
+        //don't forget the last element of left part
+        res.add(new Node(lp.data));
+        return res;
+    }
     public static void main(String[] args) {
-        Linklist list = new Linklist(new Node(5));
+        Linklist list = new Linklist(new Node(1));
         list.add(new Node(2));
+        list.add(new Node(3));
         list.add(new Node(4));
         list.add(new Node(5));
-        list.add(new Node(1));
-        oddFront(list).print();
+        resort(list).print();
     }
 }
