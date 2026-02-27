@@ -26,7 +26,10 @@ public class Linklist {
 
     //add
     public void add(Node addNode){
-        if(head == null) head = addNode;
+        if(head == null){
+            head = addNode;
+            return;
+        }
         Node cur = head;
         while(cur.nxt != null){
             cur = cur.nxt;
