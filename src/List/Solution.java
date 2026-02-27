@@ -51,16 +51,34 @@ public class Solution {
         }
         return merged;
     }
+
+    //mergesort
+    public static Linklist mergesort(Linklist list){
+        if(list.head == null || list.head.nxt == null) return list;
+        //Divide config:
+        Node mid = findMid(list);
+        Linklist left = new Linklist();
+        Linklist right = new Linklist();
+        //Divide to left and right
+        Node cur = list.head;
+        while(cur != mid){
+            left.add(new Node(cur.data));
+            cur = cur.nxt;
+        }
+        right.head = cur;
+        //recursion
+        Linklist leftSort = mergesort(left);
+        Linklist rightSort = mergesort(right);
+        return merge(leftSort,rightSort);
+    }
+
+
     public static void main(String[] args) {
-        Linklist list = new Linklist(new Node(1));
-        list.add(new Node(3));
+        Linklist list = new Linklist(new Node(5));
+        list.add(new Node(2));
+        list.add(new Node(4));
         list.add(new Node(5));
-        list.add(new Node(7));
-        Linklist l2 = new Linklist(new Node(1));
-        l2.add(new Node(2));
-        l2.add(new Node(4));
-        l2.add(new Node(6));
-        Linklist l3 = merge(list,l2);
-        l3.print();
+        list.add(new Node(1));
+        mergesort(list).print();
     }
 }
