@@ -20,6 +20,7 @@ public class Solution {
     //divide:
     //1->2->3->4 => 1->2 & 3->4
     //1->2->3->4->5 => 1->2 & 3->4->5
+
     public static Linklist[] divide(Linklist list){
         if(list.head == null || list.head.nxt == null) return new Linklist[]{list};
         Node mid = findMid(list);
@@ -37,6 +38,7 @@ public class Solution {
     //merge:
     // 1->2->4->6 and 1->3->5->7
     // => 1->1->2->3->4->5->6->7
+
     public static Linklist merge(Linklist l1, Linklist l2){
         if(l1 == null) return l2;
         if(l2 == null) return l1;
@@ -70,6 +72,7 @@ public class Solution {
     }
 
     //mergesort
+
     public static Linklist mergesort(Linklist list){
         if(list.head == null || list.head.nxt == null) return list;
         Linklist[] divideList = divide(list);
@@ -81,8 +84,10 @@ public class Solution {
         return merge(leftSort,rightSort);
     }
 
-    //oddFront: odd num always in the front of list
+    //oddFront:
+    // odd num always in the front of list
     //example: 1->2->3->4->null => 1->3->2->4->null
+
     public static Linklist oddFront(Linklist list){
         if(list.head == null || list.head.nxt == null) return list;
         Linklist odd = new Linklist();
@@ -105,8 +110,10 @@ public class Solution {
         return odd;
     }
 
-    //resort: divide list based on mid and reverse latter. Then connect two list one by one.
+    //resort:
+    // divide list based on mid and reverse latter. Then connect two list one by one.
     //example: 1->2->3->4->5->null => 1->2 & 3->4->5 => 1->2 & 5->4->3 => 1->5->2->4->3->null
+
     public static Linklist resort(Linklist list){
         if(list.head == null || list.head.nxt == null) return list;
         Linklist res = new Linklist();
@@ -130,7 +137,8 @@ public class Solution {
     }
 
 
-    // first_common: After the two linked lists meet at the first common node,
+    // first_common:
+    // After the two linked lists meet at the first common node,
     // they share the same tail (i.e., all subsequent nodes are identical).
     //example:
     //A: 1 → 2 → 3
@@ -138,7 +146,6 @@ public class Solution {
     //                7 → 8 → 9
     //              ↗
     //B:    4 → 5 → 6
-
 
     public static Node first_common(Linklist l1, Linklist l2){
         if(l1.head == null || l2.head == null) return null;
@@ -151,12 +158,28 @@ public class Solution {
         return p1;
     }
 
+    //isRing
+    //judge if list is ring
+
+    public static boolean isRing(Linklist list){
+        if(list.head == null || list.head.nxt == null) return false;
+        Node start = list.head;
+        Node cur = list.head.nxt;
+        while(cur != start){
+            if(cur == null) return false;
+            cur = cur.nxt;
+        }
+        return true;
+    }
     public static void main(String[] args) {
         Linklist list = new Linklist(new Node(1));
         list.add(new Node(2));
         list.add(new Node(3));
         list.add(new Node(4));
         list.add(new Node(5));
-        resort(list).print();
+        Node entry = new Node(6);
+        list.add(entry);
+        entry.nxt = list.head;
+        if(isRing(list)) System.out.println("True");
     }
 }
