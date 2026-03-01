@@ -154,12 +154,36 @@ public class Solution {
         res.add(new Node(lp.data));
         return res;
     }
+
+    // first_common: After the two linked lists meet at the first common node,
+    // they share the same tail (i.e., all subsequent nodes are identical).
+    //example:
+    //A: 1 → 2 → 3
+    //              ↘
+    //                7 → 8 → 9
+    //              ↗
+    //B:    4 → 5 → 6
+
+
+    public static Node first_common(Linklist l1, Linklist l2){
+        if(l1.head == null || l2.head == null) return null;
+        Node p1 = l1.head;
+        Node p2 = l2.head;
+        while(p1 != p2){
+            p1 = (p1 == null)? l2.head : p1.nxt;
+            p2 = (p2 == null)? l1.head : p2.nxt;
+        }
+        return p1;
+    }
     public static void main(String[] args) {
         Linklist list = new Linklist(new Node(1));
         list.add(new Node(2));
-        list.add(new Node(3));
-        list.add(new Node(4));
-        list.add(new Node(5));
-        resort(list).print();
+        Node common = new Node(3);
+        common.nxt = new Node(4);
+        common.nxt.nxt = new Node(5);
+        list.add(common);
+        Linklist l2 = new Linklist(new Node(6));
+        l2.add(common);
+        System.out.println(first_common(l2, list).data);
     }
 }
