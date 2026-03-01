@@ -177,20 +177,33 @@ public class Solution {
 
     //entryRing:
     //find the entry point of ring
-    //public static Node entryRing(Linklist list){
-       // if(!isRing(list)) return null;
-
-   // }
+    public static Node entryRing(Linklist list){
+       if(!isRing(list)) return null;
+       Node fast = list.head.nxt;
+       Node slow = list.head;
+       while(slow != fast){
+           fast = fast.nxt.nxt;
+           slow = slow.nxt;
+       }
+       fast = list.head;
+       slow = slow.nxt;
+       while(slow != fast){
+           fast = fast.nxt;
+           slow = slow.nxt;
+       }
+       return slow;
+    }
     public static void main(String[] args) {
         Linklist list = new Linklist(new Node(1));
         list.add(new Node(2));
         list.add(new Node(3));
-        Node four = new Node(4);
+        Node four = new Node(5);
+        list.add(new Node(4));
         list.add(four);
-        list.add(new Node(5));
         Node entry = new Node(6);
         list.add(entry);
         entry.nxt = four;
         if(isRing(list)) System.out.println("True");
+        System.out.println(entryRing(list).data);
     }
 }
