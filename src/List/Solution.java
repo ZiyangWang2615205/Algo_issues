@@ -168,7 +168,7 @@ public class Solution {
         Node slow = list.head;
         Node fast = list.head.nxt;
         while(slow != fast){
-            if(fast.nxt == null || fast.nxt.nxt == null) return false;
+            if(fast == null || fast.nxt == null) return false;
             fast = fast.nxt.nxt;
             slow = slow.nxt;
         }
@@ -193,17 +193,34 @@ public class Solution {
        }
        return slow;
     }
+
+    //reverse_by_couple:
+    //1->2->3->4->5 => 2->1->4->3->5
+    public static Linklist reverse_by_couple(Linklist list){
+        if(list.head == null || list.head.nxt == null) return list;
+        Linklist res = new Linklist();
+        Node dummy = new Node(-1);
+        dummy.nxt = list.head;
+        Node prev = dummy;
+        while(prev.nxt != null && prev.nxt.nxt != null){
+            Node cur = prev.nxt;
+            Node next = prev.nxt.nxt;
+            //connection
+            prev.nxt = next;
+            cur.nxt = next.nxt;
+            next.nxt = cur;
+            //iter
+            prev = cur;
+        }
+        res.head = dummy.nxt;
+        return res;
+    }
     public static void main(String[] args) {
         Linklist list = new Linklist(new Node(1));
         list.add(new Node(2));
         list.add(new Node(3));
-        Node four = new Node(5);
         list.add(new Node(4));
-        list.add(four);
-        Node entry = new Node(6);
-        list.add(entry);
-        entry.nxt = four;
-        if(isRing(list)) System.out.println("True");
-        System.out.println(entryRing(list).data);
+        list.add(new Node(5));
+        reverse_by_couple(list).print();
     }
 }
