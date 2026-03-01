@@ -1,5 +1,5 @@
 # Algo_issues
-LeetCode / Algorithm problem solutions and notes
+Used for recording some Algorithm and Leetcode problems that I've finished
 
 ## Linklist Questions list:
 ### Basic Method of Linklist:
