@@ -215,12 +215,57 @@ public class Solution {
         res.head = dummy.nxt;
         return res;
     }
+
+    //reverse_by_input:
+    //replace couple by input,
+    //for example, input = 3 : 1->2->3->4->5 => 3->2->1->4->5
+    public static Node[] helper(Node start, Node tail){
+        Linklist flip = new Linklist(start);
+        flip.reverse();
+        return new Node[]{tail,start};
+    }
+    public static Linklist reverse_by_input(Linklist list, int input){
+        if(input < 2 || list.head == null || list.head.nxt == null) return list;
+        Linklist res = new Linklist();
+        Node dummy = new Node(-1);
+        dummy.nxt = list.head;
+        Node prev = dummy;
+        while(prev.nxt != null && prev.nxt.nxt != null){
+            Node tail = prev;
+            for (int i = 0; i < input; i++) {
+                tail = tail.nxt;
+                //if remain of nodes not enough
+                if(tail == null){
+                    res.head = dummy.nxt;
+                    return res;
+                }
+            }
+            //disconnect
+            Node next = tail.nxt;
+            Node start = prev.nxt;
+            tail.nxt = null;
+            prev.nxt = null;
+            //reverse
+            Node[] flip = helper(start,tail);
+            //connect
+            prev.nxt = flip[0];
+            flip[1].nxt = next;
+            prev = flip[1];
+        }
+        res.head = dummy.nxt;
+        return res;
+    }
     public static void main(String[] args) {
         Linklist list = new Linklist(new Node(1));
         list.add(new Node(2));
         list.add(new Node(3));
         list.add(new Node(4));
         list.add(new Node(5));
-        reverse_by_couple(list).print();
+        Node end = new Node(6);
+        list.add(end);
+        Node[] flip = helper(list.head,end);
+        System.out.println(flip[0].data);
+        System.out.println(flip[1].data);
+        System.out.println(flip[0].nxt.data);
     }
 }
