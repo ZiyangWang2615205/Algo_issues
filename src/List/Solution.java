@@ -17,6 +17,23 @@ public class Solution {
         return slow;
     }
 
+    //divide:
+    //1->2->3->4 => 1->2 & 3->4
+    //1->2->3->4->5 => 1->2 & 3->4->5
+    public static Linklist[] divide(Linklist list){
+        if(list.head == null || list.head.nxt == null) return new Linklist[]{list};
+        Node mid = findMid(list);
+        Linklist left = new Linklist();
+        Linklist right = new Linklist();
+        Node cur = list.head;
+        while(cur != mid){
+            left.add(new Node(cur.data));
+            cur = cur.nxt;
+        }
+        right.head = cur;
+        return new Linklist[]{left,right};
+    }
+
     //merge:
     // 1->2->4->6 and 1->3->5->7
     // => 1->1->2->3->4->5->6->7
@@ -55,17 +72,9 @@ public class Solution {
     //mergesort
     public static Linklist mergesort(Linklist list){
         if(list.head == null || list.head.nxt == null) return list;
-        //Divide config:
-        Node mid = findMid(list);
-        Linklist left = new Linklist();
-        Linklist right = new Linklist();
-        //Divide to left and right
-        Node cur = list.head;
-        while(cur != mid){
-            left.add(new Node(cur.data));
-            cur = cur.nxt;
-        }
-        right.head = cur;
+        Linklist[] divideList = divide(list);
+        Linklist left = divideList[0];
+        Linklist right = divideList[1];
         //recursion
         Linklist leftSort = mergesort(left);
         Linklist rightSort = mergesort(right);
@@ -97,63 +106,29 @@ public class Solution {
     }
 
     //resort: divide list based on mid and reverse latter. Then connect two list one by one.
-    //example: 1->2->3->4->5->null => 1->2->3 & 4->5 => 1->2->3 & 5->4 => 1->5->2->4->3->null
-    public static Node resort1(Linklist list){
-        if(list.head == null || list.head.nxt == null) return list.head;
-        //divide
-        Node mid = findMid(list);
-        Linklist left = new Linklist();
-        Linklist right = new Linklist();
-        Node cur = list.head;
-        while(cur != mid.nxt){
-            left.add(new Node(cur.data));
-            cur = cur.nxt;
-        }
-        right.head = cur;
-        //reverse right list
-        right.reverse();
-
-        Node lp = left.head;
-        Node rp = right.head;
-       while(rp != null){
-           Node l_next = lp.nxt;
-           Node r_next = rp.nxt;
-           //connect one by one
-           lp.nxt = rp;
-           rp.nxt = l_next;
-           lp = l_next;
-           rp = r_next;
-       }
-       return left.head;
-    }
-
+    //example: 1->2->3->4->5->null => 1->2 & 3->4->5 => 1->2 & 5->4->3 => 1->5->2->4->3->null
     public static Linklist resort(Linklist list){
         if(list.head == null || list.head.nxt == null) return list;
         Linklist res = new Linklist();
-        //divide
-        Node mid = findMid(list);
-        Linklist left = new Linklist();
-        Linklist right = new Linklist();
-        Node cur = list.head;
-        while(cur != mid.nxt){
-            left.add(new Node(cur.data));
-            cur = cur.nxt;
-        }
-        right.head = cur;
+        Linklist[] div = divide(list);
         //reverse right list
-        right.reverse();
-        Node lp = left.head;
-        Node rp = right.head;
-        while(rp != null){
+        div[1].reverse();
+        //connection
+        Node lp = div[0].head;
+        Node rp = div[1].head;
+        while (lp != null && rp != null){
             res.add(new Node(lp.data));
             lp = lp.nxt;
             res.add(new Node(rp.data));
             rp = rp.nxt;
         }
-        //don't forget the last element of left part
-        res.add(new Node(lp.data));
+        while(rp != null){
+            res.add(new Node(rp.data));
+            rp = rp.nxt;
+        }
         return res;
     }
+
 
     // first_common: After the two linked lists meet at the first common node,
     // they share the same tail (i.e., all subsequent nodes are identical).
@@ -175,15 +150,13 @@ public class Solution {
         }
         return p1;
     }
+
     public static void main(String[] args) {
         Linklist list = new Linklist(new Node(1));
         list.add(new Node(2));
-        Node common = new Node(3);
-        common.nxt = new Node(4);
-        common.nxt.nxt = new Node(5);
-        list.add(common);
-        Linklist l2 = new Linklist(new Node(6));
-        l2.add(common);
-        System.out.println(first_common(l2, list).data);
+        list.add(new Node(3));
+        list.add(new Node(4));
+        list.add(new Node(5));
+        resort(list).print();
     }
 }
