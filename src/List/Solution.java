@@ -1,5 +1,7 @@
 package List;
 
+import java.util.List;
+
 public class Solution {
     //findMid:
     // 1->2->3->null return 2
@@ -158,28 +160,37 @@ public class Solution {
         return p1;
     }
 
-    //isRing
+    //isRing:
     //judge if list is ring
 
     public static boolean isRing(Linklist list){
         if(list.head == null || list.head.nxt == null) return false;
-        Node start = list.head;
-        Node cur = list.head.nxt;
-        while(cur != start){
-            if(cur == null) return false;
-            cur = cur.nxt;
+        Node slow = list.head;
+        Node fast = list.head.nxt;
+        while(slow != fast){
+            if(fast.nxt == null || fast.nxt.nxt == null) return false;
+            fast = fast.nxt.nxt;
+            slow = slow.nxt;
         }
         return true;
     }
+
+    //entryRing:
+    //find the entry point of ring
+    //public static Node entryRing(Linklist list){
+       // if(!isRing(list)) return null;
+
+   // }
     public static void main(String[] args) {
         Linklist list = new Linklist(new Node(1));
         list.add(new Node(2));
         list.add(new Node(3));
-        list.add(new Node(4));
+        Node four = new Node(4);
+        list.add(four);
         list.add(new Node(5));
         Node entry = new Node(6);
         list.add(entry);
-        entry.nxt = list.head;
+        entry.nxt = four;
         if(isRing(list)) System.out.println("True");
     }
 }
