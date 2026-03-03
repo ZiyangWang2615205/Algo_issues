@@ -14,7 +14,7 @@ public class Review {
         Node dummy = new Node(-1);
         dummy.nxt = list.head;
         Node prev = dummy;
-        while(prev != null && prev.nxt != null){
+        while(prev.nxt != null && prev.nxt.nxt != null){
             Node tail = prev;
             //find tail
             for (int i = 0; i < k; i++) {
@@ -42,12 +42,32 @@ public class Review {
         return  res;
     }
 
+    public static Linklist reverse_by_cp(Linklist list){
+        if(list.head == null || list.head.nxt == null) return null;
+        Node dummy = new Node(-1);
+        dummy.nxt = list.head;
+        Node prev = dummy;
+        while(prev.nxt != null && prev.nxt.nxt != null){
+            Node cur = prev.nxt;
+            Node next = prev.nxt.nxt;
+
+            prev.nxt = next;
+            cur.nxt = next.nxt;
+            next.nxt = cur;
+
+            prev = cur;
+        }
+        Linklist res = new Linklist();
+        res.head = dummy.nxt;
+        return res;
+    }
+
     public static void main(String[] args) {
         Linklist test = new Linklist(new Node(1));
         test.add(new Node(2));
         test.add(new Node(3));
         test.add(new Node(4));
         test.add(new Node(5));
-        reverse_by_k(test,3).print();
+        reverse_by_cp(test).print();
     }
 }
