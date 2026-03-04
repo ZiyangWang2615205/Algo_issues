@@ -193,27 +193,48 @@ public class Solution {
     //		2		3
     //
     //=>`calcPathSum`  return 12+13=25
-
-    public static int pathSum_aux(Node root, int prevSum){
+    public static int path_sum(Node root, int prev){
         if(root == null) return 0;
-        prevSum = prevSum * 10 + root.data;
+        int cur = prev * 10 + root.data;
         if(root.left == null && root.right == null){
-            return prevSum;
-        }else {
-            int leftSum = pathSum_aux(root.left,prevSum);
-            int rightSum = pathSum_aux(root.right,prevSum);
-            return leftSum + rightSum;
+            return cur;
+        }else{
+            int leftSum = path_sum(root.left,cur);
+            int rightSum = path_sum(root.right,cur);
+            return leftSum+rightSum;
         }
     }
-    public static int calc_path_sum(Node root){
+    public static int calc_path_sum(Node root){return path_sum(root,0);}
+
+    //target_Eql_pathSum:
+    //Example: 	1
+    //
+    //		2		3
+    //
+    //target = 3
+    //
+    //=>`targetEqualPS`  return 1
+    //calc how many pathSum = target
+    public static int num_Of_paths(Node root, int target, int prev){
         if(root == null) return 0;
-        return pathSum_aux(root,0);
+        int count = 0;
+        int cur = root.data + prev;
+        if(root.left == null && root.right == null){
+            if(cur == target) count++;
+        }else{
+            count += num_Of_paths(root.left,target,cur);
+            count += num_Of_paths(root.right,target,cur);
+        }
+        return count;
     }
+    public static int target_Eql_pathSum(Node root, int target){return num_Of_paths(root,target,0);}
+
 
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
         System.out.println(calc_path_sum(root));
+        System.out.println(target_Eql_pathSum(root,3));
     }
 }
