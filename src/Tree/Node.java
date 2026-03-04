@@ -199,6 +199,7 @@ public class Node {
         root.right = ansRight;
         return root;
     }
+
     public static void main(String[] args) {
         Node root = new Node(2);
         root.left = new Node(1);
