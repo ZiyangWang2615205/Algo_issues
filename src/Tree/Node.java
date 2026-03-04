@@ -114,6 +114,7 @@ public class Node {
         Stack<Node> stack = new Stack<>();
         int prev = Integer.MIN_VALUE;
         Node cur = root;
+        //use stack to do inorder
         while(cur != null || !stack.isEmpty()){
             while(cur != null){
                 stack.push(cur);
@@ -128,12 +129,27 @@ public class Node {
         }
         return true;
     }
+
+    //isBST could also be done by recursion
+    static int prev = Integer.MIN_VALUE;
+    public static boolean isBST_recur(Node root){
+        if(root == null) return true;
+        if(!isBST_recur(root.left)){
+            return false;
+        }
+        if(root.data <= prev){
+            return false;
+        }
+        prev = root.data;
+        return isBST_recur(root.right);
+    }
+
     public static void main(String[] args) {
         Node root = new Node(2);
         root.left = new Node(1);
         root.right = new Node(3);
         root.right.right = new Node(4);
-        if(isBST(root)){
+        if(isBST_recur(root)){
             System.out.println(maxLevel(root));
         }
     }
