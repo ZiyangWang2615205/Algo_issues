@@ -161,14 +161,23 @@ public class Node {
         return toBSThelper(arr,0,arr.length-1);
     }
 
+    //combineTree:
+    //combine two trees by adding the values of nodes at the same positions
+    public static Node combineTree(Node t1, Node t2){
+        if(t1 == null) return t2;
+        if(t2 == null) return t1;
+        Node combine = new Node(t1.data + t2.data);
+        combine.left = combineTree(t1.left,t2.left);
+        combine.right = combineTree(t1.right,t2.right);
+        return combine;
+    }
 
     public static void main(String[] args) {
         Node root = new Node(2);
         root.left = new Node(1);
         root.right = new Node(3);
-        root.right.right = new Node(4);
-        Node newRoot = arrToBST(new int[]{1,2,3,4,5,6,7});
-        System.out.println(stackInorder(newRoot));
+        Node newRoot = arrToBST(new int[]{1,2,3});
+        System.out.println(stackInorder(combineTree(root, newRoot)));
     }
 
 }
