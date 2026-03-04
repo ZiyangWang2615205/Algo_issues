@@ -105,12 +105,35 @@ public class Node {
         //don't forget judge other node recursively
         return Math.abs(maxLevel(root.left)-maxLevel(root.right)) <= 1 && isBalance(root.left) && isBalance(root.right);
     }
+
+    //isBST:
+    //if tree is binary search tree then left child < root < right child
+    //therefore, it should be incremented if output with inorder
+    public static boolean isBST(Node root){
+        if(root == null) return true;
+        Stack<Node> stack = new Stack<>();
+        int prev = Integer.MIN_VALUE;
+        Node cur = root;
+        while(cur != null || !stack.isEmpty()){
+            while(cur != null){
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.pop();
+            if(cur.data <= prev){
+                return false;
+            }
+            prev = cur.data;
+            cur = cur.right;
+        }
+        return true;
+    }
     public static void main(String[] args) {
-        Node root = new Node(1);
-        root.left = new Node(2);
+        Node root = new Node(2);
+        root.left = new Node(1);
         root.right = new Node(3);
         root.right.right = new Node(4);
-        if(isBalance(root)){
+        if(isBST(root)){
             System.out.println(maxLevel(root));
         }
     }
