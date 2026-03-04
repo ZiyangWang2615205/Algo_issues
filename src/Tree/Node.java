@@ -2,6 +2,7 @@ package Tree;
 
 import java.net.Inet4Address;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -144,14 +145,30 @@ public class Node {
         return isBST_recur(root.right);
     }
 
+    //arrToBST:
+    //change array to binary search tree
+    public static Node toBSThelper(int[] arr, int left, int right){
+        if(left > right) return null;
+        int mid = (left+right)/2;
+        Node root = new Node(arr[mid]);
+        root.left = toBSThelper(arr,left,mid-1);
+        root.right = toBSThelper(arr,mid+1,right);
+        return root;
+    }
+    public static Node arrToBST(int[] arr){
+        if(arr.length == 0) return null;
+        Arrays.sort(arr);
+        return toBSThelper(arr,0,arr.length-1);
+    }
+
+
     public static void main(String[] args) {
         Node root = new Node(2);
         root.left = new Node(1);
         root.right = new Node(3);
         root.right.right = new Node(4);
-        if(isBST_recur(root)){
-            System.out.println(maxLevel(root));
-        }
+        Node newRoot = arrToBST(new int[]{1,2,3,4,5,6,7});
+        System.out.println(stackInorder(newRoot));
     }
 
 }
