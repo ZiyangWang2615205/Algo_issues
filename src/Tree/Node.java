@@ -63,14 +63,30 @@ public class Node {
         return res;
     }
 
-
+    //stackInorder: left-root-right
+    public static List<Integer> stackInorder(Node root){
+        if(root == null) return new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+        Node cur = root;
+        while(cur != null || !stack.isEmpty()){
+            //iter add left children
+            while(cur != null){
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.pop();
+            res.add(cur.data);
+            cur = cur.right;
+        }
+        return res;
+    }
 
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
-        System.out.println(stackPreorder(root));
+        System.out.println(stackInorder(root));
     }
-
 
 }
