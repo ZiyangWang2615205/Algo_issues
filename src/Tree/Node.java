@@ -1,5 +1,6 @@
 package Tree;
 
+import java.net.Inet4Address;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -82,11 +83,26 @@ public class Node {
         return res;
     }
 
+    //maxLevel:
+    //          1
+    //
+    //		2		3
+    //
+    //					6
+    //return level = 3
+    public static int maxLevel(Node root){
+        if(root == null) return 0;
+        int leftDepth = maxLevel(root.left);
+        int rightDepth = maxLevel(root.right);
+        return Math.max(leftDepth,rightDepth) + 1;
+    }
+
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
-        System.out.println(stackInorder(root));
+        root.right.right = new Node(4);
+        System.out.println(maxLevel(root));
     }
 
 }
