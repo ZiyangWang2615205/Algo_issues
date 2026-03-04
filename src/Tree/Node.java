@@ -172,12 +172,26 @@ public class Node {
         return combine;
     }
 
+    //isSymmetric:
+    public static boolean symmetricHelper(Node node1, Node node2){
+        //don't forget check boundary of two nodes at first
+        if(node1 == null && node2 == null) return true;
+        if(node1 == null || node2 == null) return false;
+        if(node1.data != node2.data) return false;
+        return symmetricHelper(node1.left,node2.right) && symmetricHelper(node1.right,node2.left);
+    }
+    public static boolean isSymmetric(Node root){
+        if(root == null) return true;
+        if(root.left == null && root.right == null) return true;
+        return symmetricHelper(root.left,root.right);
+    }
     public static void main(String[] args) {
-        Node root = new Node(2);
-        root.left = new Node(1);
-        root.right = new Node(3);
-        Node newRoot = arrToBST(new int[]{1,2,3});
-        System.out.println(stackInorder(combineTree(root, newRoot)));
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.left.right = new Node(4);
+        root.right = new Node(2);
+        root.right.left = new Node(4);
+        if(isSymmetric(root)) System.out.println("true");
     }
 
 }
