@@ -1,5 +1,9 @@
 package Tree;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 public class Node {
     int data;
     Node left;
@@ -41,12 +45,31 @@ public class Node {
         }
     }
 
+    //stackPreorder: use stack to finish preorder
+    //left-root-right
+    public static List<Integer> stackPreorder(Node root){
+        if(root == null) return new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            Node cur = stack.pop();
+            res.add(cur.data);
+            //check right and left children
+            //pay attention to order of adding
+            if(cur.right != null) stack.push(cur.right);
+            if(cur.left != null) stack.push(cur.left);
+        }
+        return res;
+    }
+
+
 
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
-        postorder(root);
+        System.out.println(stackPreorder(root));
     }
 
 
