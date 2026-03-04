@@ -187,5 +187,33 @@ public class Solution {
         return root;
     }
 
+    //calc_path_sum
+    //Example: 	1
+    //
+    //		2		3
+    //
+    //=>`calcPathSum`  return 12+13=25
 
+    public static int pathSum_aux(Node root, int prevSum){
+        if(root == null) return 0;
+        prevSum = prevSum * 10 + root.data;
+        if(root.left == null && root.right == null){
+            return prevSum;
+        }else {
+            int leftSum = pathSum_aux(root.left,prevSum);
+            int rightSum = pathSum_aux(root.right,prevSum);
+            return leftSum + rightSum;
+        }
+    }
+    public static int calc_path_sum(Node root){
+        if(root == null) return 0;
+        return pathSum_aux(root,0);
+    }
+
+    public static void main(String[] args) {
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        System.out.println(calc_path_sum(root));
+    }
 }
