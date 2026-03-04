@@ -97,12 +97,22 @@ public class Node {
         return Math.max(leftDepth,rightDepth) + 1;
     }
 
+    //isBalance:
+    //the difference of level between left children and right children should <= 1
+    //level(l) - level(r) <= 1
+    public static boolean isBalance(Node root){
+        if(root == null) return true;
+        //don't forget judge other node recursively
+        return Math.abs(maxLevel(root.left)-maxLevel(root.right)) <= 1 && isBalance(root.left) && isBalance(root.right);
+    }
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
         root.right.right = new Node(4);
-        System.out.println(maxLevel(root));
+        if(isBalance(root)){
+            System.out.println(maxLevel(root));
+        }
     }
 
 }
