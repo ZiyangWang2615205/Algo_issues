@@ -84,6 +84,7 @@ public class Review {
         return auxOfTarget(root,0,target);
     }
 
+    //target2
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
