@@ -50,10 +50,45 @@ public class Review {
     }
 
     //calc_path_sum
+    public static int auxOfPS(Node root, int prev){
+        if(root == null) return 0;
+        int cur = prev * 10 + root.data;
+        if(root.left == null && root.right == null){
+            return cur;
+        }else{
+            int leftSum = auxOfPS(root.left,cur);
+            int rightSum = auxOfPS(root.right,cur);
+            return leftSum+rightSum;
+        }
+    }
+    public static int calcPathSum(Node root){
+        return auxOfPS(root,0);
+    }
+
+    //targetEql
+    public static int auxOfTarget(Node root, int prev, int target){
+        if(root == null) return 0;
+        int count = 0;
+        int cur = prev + root.data;
+        if(root.left == null && root.right == null){
+            if(target == cur){
+                count++;
+            }
+        }else {
+            count += auxOfTarget(root.left,cur,target);
+            count += auxOfTarget(root.right,cur,target);
+        }
+        return count;
+    }
+    public static int targetEql(Node root, int target){
+        return auxOfTarget(root,0,target);
+    }
+
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
-        if(isSymmetric(root)) System.out.println(order(arrToBST(new int[]{2, 1, 3})));
+        System.out.println(calcPathSum(root));
+        System.out.println(targetEql(root, 3));
     }
 }

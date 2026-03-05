@@ -204,7 +204,9 @@ public class Solution {
             return leftSum+rightSum;
         }
     }
-    public static int calc_path_sum(Node root){return path_sum(root,0);}
+    public static int calc_path_sum(Node root){
+        return path_sum(root,0);
+    }
 
     //target_Eql_pathSum:
     //Example: 	1
@@ -227,7 +229,9 @@ public class Solution {
         }
         return count;
     }
-    public static int target_Eql_pathSum(Node root, int target){return num_Of_paths(root,target,0);}
+    public static int target_Eql_pathSum(Node root, int target){
+        return num_Of_paths(root,target,0);
+    }
 
 
     public static void main(String[] args) {
