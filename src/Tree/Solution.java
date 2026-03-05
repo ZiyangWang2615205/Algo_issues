@@ -233,12 +233,32 @@ public class Solution {
         return num_Of_paths(root,target,0);
     }
 
+    //target_pathSum_anyway
+    //Same as the last one, but it does not require calculating the path sum starting from the root.
+    //Example: 	1
+    //
+    //		2		3
+    //
+    //target = 3
+    //
+    //=>`target_pathSum_anyway` return 2
+    public static int target_pathSum_anyway (Node root, int target){
+        if(root == null) return 0;
+        int sum = num_Of_paths(root,target,0);
+        sum += target_pathSum_anyway(root.left,target);
+        sum += target_pathSum_anyway(root.right,target);
+        return sum;
+    }
+
+
 
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
-        System.out.println(calc_path_sum(root));
-        System.out.println(target_Eql_pathSum(root,3));
+        root.left.left = new Node(3);
+        //System.out.println(calc_path_sum(root));
+        //System.out.println(target_Eql_pathSum(root,3));
+        System.out.println(target_pathSum_anyway(root,3));
     }
 }
