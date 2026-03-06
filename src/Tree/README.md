@@ -151,17 +151,19 @@ public static void postorder(TreeNode root){
         return res;
     }
 ```
-**_stack+iteration_** 的方法往往在代码的处理方面有细微的不同，而 **_recursion_** 的方法却只是recursion顺序的变化。
+**_stack+iteration_** 的方法往往在代码的处理方面有很大的不同，而 **_recursion_** 的方法只是recursion顺序改变而已。
 
 ## *3.Simple Tree Questions*
 
 ### `maxDepth` : 找出Tree的最大深度
 
-Example: 		1
-
-​			2		3
-
-​						6
+Example:
+```mermaid
+graph TD
+    1-->2
+    1-->3
+    2-->6
+```
 
 =>`maxDepth` return 3
 
@@ -177,13 +179,31 @@ public static int maxDepth(TreeNode root){
 }
 ```
 
-时间复杂度：O(n)
+time-complexity：**O(n)**
 
-空间复杂度：O(h)
+space-complexity：**O(h)**
 
 
 
 ### `isBalanced`：判断Tree是否平衡
+Example 1:
+```mermaid
+graph TD
+    1-->2
+    1-->3
+    2-->6
+```
+=>`isBalanced` return `true`
+
+Example 2:
+```mermaid
+graph TD
+1-->2
+1-->3
+2-->6
+6-->7
+```
+=> `isBalacned` => return `false`
 
 规定左右子树深度差不超过1。
 
@@ -197,13 +217,19 @@ public static boolean isBalanced(TreeNode root){
 }
 ```
 
-时间复杂度：O(nlogn)/O(n^2)
+时间复杂度：**O(nlogn)/O(n^2)**
 
-空间复杂度：O(h)
+空间复杂度：**O(h)**
 
 
 
 ### `isBST`：判断Tree是否为binary search tree
+
+```mermaid
+graph TD
+2-->1
+2-->3
+```
 
 binary search tree: 左子树<根节点<右子树
 
@@ -229,9 +255,9 @@ public static boolean isBST(TreeNode root){
 }
 ```
 
-时间复杂度：O(n)
+time-complexity：**O(n)**
 
-空间复杂度：O(h)
+space-complexity：**O(h)**
 
 
 
@@ -258,13 +284,57 @@ public static TreeNode auxOfArrToBST(int[] arr, int left, int right){
 }
 ```
 
-时间复杂度：O(n)
+time-complexity：**O(n)**
 
-空间复杂度：O(h)
+space-complexity：**O(h)**
 
 
 
 ### `mergeTree`：合并Tree，对应节点相加
+
+```mermaid
+flowchart LR
+
+subgraph Tree1
+A1[1]
+A2[3]
+A3[2]
+A4[5]
+
+A1 --> A2
+A1 --> A3
+A2 --> A4
+end
+
+subgraph Tree2
+B1[2]
+B2[1]
+B3[3]
+B4[4]
+B5[7]
+
+B1 --> B2
+B1 --> B3
+B2 --> B4
+B3 --> B5
+end
+
+subgraph Result
+C1[3]
+C2[4]
+C3[5]
+C4[9]
+C6[7]
+
+C1 --> C2
+C1 --> C3
+C2 --> C4
+C3 --> C6
+end
+
+Tree1 --> Result
+Tree2 --> Result
+```
 
 思路：对应节点相加，左右递归
 
