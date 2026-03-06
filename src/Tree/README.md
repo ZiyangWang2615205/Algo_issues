@@ -45,7 +45,7 @@ public static void preorder(TreeNode root){
 }
 ```
 
-以上是用recursion的方法解决`preorder`，当然我们也可以采用**_iteration+stack_**的放来做(虽然本质上recursion也是使用stack):
+以上是用recursion的方法解决`preorder`，当然我们也可以采用 **_iteration+stack_** 的放来做(虽然本质上recursion也是使用stack):
 
 ```java
 //stackPreorder: use stack to finish preorder
@@ -82,7 +82,7 @@ public static void inorder(TreeNode root){
     }
 }
 ```
-同理的附上用**_stack+iteration_**解决`inorder`：
+同理的附上用 **_stack+iteration_** 解决`inorder`：
 ```java
 //stackInorder: left-root-right
     public static List<Integer> stackInorder(Node root){
