@@ -18,10 +18,10 @@ Each part has its own **solutions/review/notes**
 
 ## Categories
 
-| Category    | Problems                 |
-|-------------|--------------------------|
-| Linked List | [Go](src/list/README.md) |
-| Binary Tree | [Go](tree/README.md)     |
+| Category    | Problems             |
+|-------------|----------------------|
+| Linked List | [Go](src/List/)      |
+| Binary Tree | [Go](tree/README.md) |
 
 
 ## Linklist Questions:
