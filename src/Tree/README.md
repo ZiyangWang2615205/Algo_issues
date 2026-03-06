@@ -184,7 +184,7 @@ time-complexity：**O(n)**
 space-complexity：**O(h)**
 
 
-
+---
 ### `isBalanced`：判断Tree是否平衡
 Example 1:
 ```mermaid
@@ -222,7 +222,7 @@ time-complexity：**O(nlogn)/O(n^2)**
 space-complexity：**O(h)**
 
 
-
+---
 ### `isBST`：判断Tree是否为binary search tree
 
 ```mermaid
@@ -260,7 +260,7 @@ time-complexity：**O(n)**
 space-complexity：**O(h)**
 
 
-
+---
 ### `arraryToBST`: 将有序数组转化为binary search tree
 
 思路：采用binary search的思想，每次都把mid当作新的根节点递归。
@@ -289,7 +289,7 @@ time-complexity：**O(n)**
 space-complexity：**O(h)**
 
 
-
+---
 ### `mergeTree`：合并Tree，对应节点相加
 
 ```mermaid
@@ -356,7 +356,7 @@ time-complexity：**O(n)**
 
 space-complexity：**O(h)**
 
-
+---
 ### `isSymmetric`：判断Tree是否对称
 
 Example:	
@@ -409,7 +409,7 @@ time-complexity：**O(n)**
 space-complexity：**O(h)**
 
 
-
+---
 ### `flipTree`：镜像反转Tree
 
 Example:
@@ -493,7 +493,7 @@ time-complexity：**O(n)**
 space-complexity：**O(h)**
 
 
-
+---
 ### `targetEqualPS`: 计算符合要求路径和的路有多少条
 
 Example:
@@ -537,7 +537,7 @@ time-complexity：**O(n)**
 space-complexity：**O(h)**
 
 
-
+---
 ### `targetEqualPS2`:计算符合要求路径和的路有多少条，但这次计算的和不一定从根节点开始。
 
 Example:
@@ -572,7 +572,7 @@ time-complexity：**O(n^2)**
 space-complexity：**O(h)**
 
 
-
+---
 ### `faltten`:将binary search tree按照preorder的顺序退化成linklist
 
 Example:
@@ -662,7 +662,7 @@ time-complexity：**O(n)**
 space-complexity：**O(1)**
 
 
-
+---
 ### `kthSmallestOfBST`：找出binary search tree里第k小的节点
 
 思路：inorder遍历找到第k个节点即为结果
@@ -693,7 +693,7 @@ time-complexity：**O(n)**
 space-complexity：**O(h)**
 
 
-
+---
 ### `commonAncestor`：找出两个nodes的最小公共parent
 
 Example:
@@ -740,7 +740,7 @@ time-complexity：**O(n)**
 space-complexity：**O(h)**
 
 
-
+---
 ### `commonAncestorBST`：在BST里找最小公共parent
 
 思路1：按照BST的性质我们可以optimize，只要node1/node2 < root < node1/node2，那么一定回传root，剩下两种情况和之前一样。
@@ -839,7 +839,7 @@ time-complexity：**O(n)**
 space-complexity：**O(n)**
 
 
-
+---
 ### `levelOrderWithlayer`
 
 如`level_order`的example，但是我们想return[[1],[2,3]]即按照层标注
@@ -880,7 +880,7 @@ time-complexity：：**O(n)**
 space-complexity：**O(n)**
 
 
-
+---
 ### `serialize`：序列化
 
 即将tree按照level-order的顺序变成String
@@ -933,7 +933,7 @@ time-complexity：**O(n^2)**
 space-complexity：**O(h)**
 
 
-
+---
 ### `deserialize`：反序列化
 
 即将String变成Tree，按照`level order`的顺序
