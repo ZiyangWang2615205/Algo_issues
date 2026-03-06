@@ -441,6 +441,20 @@ public class Solution {
         return sb.substring(0,sb.length()-1);
     }
 
+    //serialize
+    //input: pre order tree => output: string
+    //Example: 	1
+    //
+    //		2		3
+    //
+    //    4            5
+    //=>`serialize` return "1,2,4,null,null,null,3,null,5,null,null"
+
+    public static String serialize_dfs(Node root){
+        if(root == null) return "null";
+        return root.data + "," + serialize_dfs(root.left) + "," + serialize_dfs(root.right);
+    }
+
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
@@ -449,5 +463,6 @@ public class Solution {
         root.right.right = new Node(5);
         System.out.println(levelOrder_layer(root));
         System.out.println(serialize_bfs(root));
+        System.out.println(serialize_dfs(root));
     }
 }
