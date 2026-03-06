@@ -85,6 +85,7 @@ public class Review {
     }
 
     //target2
+    //bruce flatten
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
