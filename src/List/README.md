@@ -161,7 +161,9 @@ public static ListNode findMid(ListNode head){
 }
 ```
 
-时间复杂度: O(n)，空间复杂度: O(1)
+time-complexity: **O(n)**
+
+space-complexity: **O(1)**
 
 ### `mergesort`：归并排序
 
@@ -217,7 +219,9 @@ public static Linklist merge(Linklist l1, Linklist l2){
 }
 ```
 
-时间复杂度: O(n+m)，空间复杂度: O(n+m)
+time-complexity: **O(n+m)**
+
+space-complexity: **O(n+m)**
 
 
 
@@ -254,7 +258,9 @@ public static Linklist mergesort(Linklist list){
 }
 ```
 
-时间复杂度: O(nlogn)，空间复杂度: O(nlogn)
+time-complexity: **O(nlogn)**
+
+space-complexity: **O(nlogn)**
 
 
 
@@ -295,7 +301,9 @@ public static Linklist oddFront(Linklist list){
 }
 ```
 
-时间复杂度: O(n)，空间复杂度: O(n)
+time-complexity: **O(n)**
+
+space-complexity: **O(n)**
 
 
 
@@ -341,7 +349,9 @@ public static Linklist resort(Linklist list){
 }
 ```
 
-时间复杂度: O(n)，空间复杂度: O(n)
+time-complexity: **O(n)**
+
+space-complexity: **O(n)**
 
 
 
@@ -366,7 +376,9 @@ public static ListNode commonNode(Linklist l1, Linklist l2){
 }
 ```
 
-时间复杂度: O(n+m)，空间复杂度: O(1)
+time-complexity: **O(n+m)**
+
+space-complexity: **O(1)**
 
 
 
@@ -390,7 +402,9 @@ public static boolean isRing(Linklist list){
 }
 ```
 
-时间复杂度: O(n)，空间复杂度: O(1)
+time-complexity: **O(n)**
+
+space-complexity: **O(1)**
 
 
 
@@ -422,7 +436,9 @@ public static ListNode ringEntryNode(Linklist list){
 }
 ```
 
-时间复杂度: O(n)，空间复杂度: O(1)
+time-complexity: **O(n)**
+
+space-complexity: **O(1)**
 
 
 
@@ -460,7 +476,9 @@ public static Linklist reverseByCouple(Linklist list){
 }
 ```
 
-时间复杂度: O(n)，空间复杂度: O(1)
+time-complexity: **O(n)**
+
+space-complexity: **O(1)**
 
 
 
@@ -527,4 +545,6 @@ public static Linklist reverseByK(Linklist list, int k){
 }
 ```
 
-时间复杂度: O(n)，空间复杂度: O(1)
+time-complexity: **O(n)**
+
+space-complexity: **O(1)**
