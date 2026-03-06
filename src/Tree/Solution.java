@@ -250,7 +250,19 @@ public class Solution {
         return sum;
     }
 
+    //BST_to_preorder
+    //Example: 	3					3
+    //
+    //		1		2 	   =>			1
+    //
+    //									    2
+    public static List<Integer> BST_to_preorder(Node root){
+        //preorder BST and add each node in list
+        return stackPreorder(root);
+    }
 
+    //public static List<Integer> BST_to_preorder_recur(Node root){
+    //}
 
     public static void main(String[] args) {
         Node root = new Node(1);
