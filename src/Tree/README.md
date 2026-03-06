@@ -217,9 +217,9 @@ public static boolean isBalanced(TreeNode root){
 }
 ```
 
-时间复杂度：**O(nlogn)/O(n^2)**
+time-complexity：**O(nlogn)/O(n^2)**
 
-空间复杂度：**O(h)**
+space-complexity：**O(h)**
 
 
 
@@ -352,19 +352,35 @@ public static TreeNode mergeTree(TreeNode t1, TreeNode t2){
 }
 ```
 
-时间复杂度：O(n)
+time-complexity：**O(n)**
 
-空间复杂度：O(h)
-
+space-complexity：**O(h)**
 
 
 ### `isSymmetric`：判断Tree是否对称
 
-Example:	1
+Example:	
 
-​		2		2
+```mermaid
+graph TD
+    A[1]
+    B[2]
+    C[2]
+    D[3]
+    E[4]
+    F[4]
+    G[3]
 
-​	3	4  	4	3	ps: null trees和两个单节点trees也算
+    A --> B
+    A --> C
+    B --> D
+    B --> E
+    C --> F
+    C --> G
+
+```
+
+ps: null trees和两个单节点trees也算
 
 思路：考虑三条路线相等，当前节点相等/外层相等/内层相等
 
@@ -388,18 +404,33 @@ public static boolean auxIsSymmetric(TreeNode t1, TreeNode t2){
 }
 ```
 
-时间复杂度：O(n)
+time-complexity：**O(n)**
 
-空间复杂度：O(h)
+space-complexity：**O(h)**
 
 
 
 ### `flipTree`：镜像反转Tree
 
-Example:	1					1
+Example:
+```mermaid
+flowchart LR
+subgraph Mirror
+B1[1]
+B2[3]
+B3[2]
+B1 --> B2
+B1 --> B3
+end
 
-​		2		3	=>	3		2
-
+    subgraph Original
+        A1[1]
+        A2[2]
+        A3[3]
+        A1 --> A2
+        A1 --> A3
+    end
+```
 思路：左右递归，相错连接
 
 ```java
@@ -416,9 +447,9 @@ public static TreeNode flipTree(TreeNode root){
 }
 ```
 
-时间复杂度：O(n)
+time-complexity：**O(n)**
 
-空间复杂度：O(h)
+space-complexity：**O(h)**
 
 
 
@@ -426,9 +457,11 @@ public static TreeNode flipTree(TreeNode root){
 
 ### `calcPathSum`：计算路径和
 
-Example: 	1
-
-​		2		3
+```mermaid
+ graph TD
+     1-->2
+     1-->3
+```
 
 =>`calcPathSum`  return 12+13=25
 
@@ -455,21 +488,23 @@ public static int auxOfcalcPS(TreeNode root, int prev){
 }
 ```
 
-时间复杂度：O(n)
+time-complexity：**O(n)**
 
-空间复杂度：O(h)
+space-complexity：**O(h)**
 
 
 
 ### `targetEqualPS`: 计算符合要求路径和的路有多少条
 
-Example: 	1
-
-​		2		3
-
+Example:
+```mermaid
+ graph TD
+     1-->2
+     1-->3
+```
 target = 3
 
-=>`targetEqualPS`  return 1
+=>`targetEqualPS`  return 1 **_(必须是从root-leaf)_**
 
 思路：在之前的基础上添加计数器记下路有多少条
 
@@ -497,17 +532,21 @@ public static int auxTargetEqlPS(TreeNode root, int target, int prev){
 }
 ```
 
-时间复杂度：O(n)
+time-complexity：**O(n)**
 
-空间复杂度：O(h)
+space-complexity：**O(h)**
 
 
 
 ### `targetEqualPS2`:计算符合要求路径和的路有多少条，但这次计算的和不一定从根节点开始。
 
-Example: 	1
+Example:
+```mermaid
+graph TD
+     1-->2
+     1-->3
 
-​		2		3
+```
 
 target = 3
 
@@ -528,19 +567,36 @@ public static int targetEqualPS2(TreeNode root, int target){
 }
 ```
 
-时间复杂度：O(n^2)
+time-complexity：**O(n^2)**
 
-空间复杂度：O(h)
+space-complexity：**O(h)**
 
 
 
 ### `faltten`:将binary search tree按照preorder的顺序退化成linklist
 
-Example: 	3					3
+Example:
+```mermaid
+flowchart LR
 
-​		1		2 	=>			1
+subgraph Output
+D[3]
+E[1]
+F[2]
 
-​										2
+D --> E
+E --> F
+end
+
+subgraph Input
+        A[3]
+        B[1]
+        C[2]
+
+        A --> B
+        A --> C
+        end
+```
 
 思路1:preorder BST，然后装在list中
 
@@ -568,9 +624,9 @@ public static void preorder(TreeNode root, List<TreeNode> list){
 }
 ```
 
-时间复杂度：O(n)
+time-complexity：**O(n)**
 
-空间复杂度：O(n)
+space-complexity：**O(n)**
 
 
 
@@ -601,9 +657,9 @@ public static void faltten2(TreeNode root){
 }
 ```
 
-时间复杂度：O(n)
+time-complexity：**O(n)**
 
-空间复杂度：O(1)
+space-complexity：**O(1)**
 
 
 
@@ -632,21 +688,31 @@ public static void inorder(TreeNode root, int k){
 }
 ```
 
-时间复杂度：O(n)
+time-complexity：**O(n)**
 
-空间复杂度：O(h)
+space-complexity：**O(h)**
 
 
 
 ### `commonAncestor`：找出两个nodes的最小公共parent
 
-Example: 	2
+Example:
+```mermaid 
+    flowchart LR
+        subgraph example2 
+            4-->5
+            4-->7
+            5-->6
+        end
+        subgraph example1
+        2-->1
+        2-->3
+        end
+```
 
-​		1		3
+example1: `input` => 1,3 then `output` => 2
 
-Enter: 1,3
-
-=>`commonAncestor` return 2
+example2: `input` => 5,6 then `output` => 5
 
 思路：递归找node1/node2一旦找到返回值，接下来有三种情况：1.root两边都有回传值，2.root只有一边有回传值，3.root无回传值
 
@@ -669,9 +735,9 @@ public static TreeNode commonAncestor(TreeNode root, TreeNode n1, TreeNode n2){
 }
 ```
 
-时间复杂度：O(n)
+time-complexity：**O(n)**
 
-空间复杂度：O(h)
+space-complexity：**O(h)**
 
 
 
@@ -693,9 +759,9 @@ public static TreeNode commonAncestorBSTR(TreeNode root, TreeNode n1, TreeNode n
 }
 ```
 
-时间复杂度：O(n)
+time-complexity：**O(n)**
 
-空间复杂度：O(h)
+space-complexity：**O(h)**
 
 
 
@@ -722,9 +788,9 @@ public static TreeNode commonAncestorBSTI(TreeNode root, TreeNode n1, TreeNode n
 }
 ```
 
-时间复杂度：O(h)
+time-complexity：**O(h)**
 
-空间复杂度：O(1)
+space-complexity：**O(1)**
 
 
 
@@ -734,9 +800,13 @@ public static TreeNode commonAncestorBSTI(TreeNode root, TreeNode n1, TreeNode n
 
 ### `level_order`：层序遍历
 
-Example: 	1
-
-​		2		3
+Example:
+```mermaid
+ graph TD
+     1-->2
+     
+     1-->3
+```
 
 =>`level_oreder` return [1,2,3]
 
@@ -764,9 +834,9 @@ public static List<TreeNode> level_order(TreeNode root){
 }
 ```
 
-时间复杂度：O(n)
+time-complexity：**O(n)**
 
-空间复杂度：O(n)
+space-complexity：**O(n)**
 
 
 
@@ -805,9 +875,9 @@ public static List<List<TreeNode>> levelOrderWithlayer(TreeNode root){
 }
 ```
 
-时间复杂度：O(n)
+time-complexity：：**O(n)**
 
-空间复杂度：O(n)
+space-complexity：**O(n)**
 
 
 
@@ -842,9 +912,9 @@ public static String serializeBFS(TreeNode root){
 }
 ```
 
-时间复杂度：O(n)
+time-complexity：**O(n)**
 
-空间复杂度：O(n)
+space-complexity：**O(n)**
 
 
 
@@ -858,15 +928,15 @@ public static String serializeDFS(TreeNode root){
 }
 ```
 
-时间复杂度：O(n^2)
+time-complexity：**O(n^2)**
 
-空间复杂度：O(h)
+space-complexity：**O(h)**
 
 
 
 ### `deserialize`：反序列化
 
-即将String变成Tree
+即将String变成Tree，按照`level order`的顺序
 
 思路：先把String变成array，然后再一个个连接
 
@@ -904,6 +974,6 @@ public static TreeNode deserialize(String str){
 }
 ```
 
-时间复杂度：O(n)
+time-complexity：**O(n)**
 
-空间复杂度：O(n)
+space-complexity：**O(n)**
