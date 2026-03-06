@@ -94,6 +94,7 @@ public class Solution {
                 cur = cur.right;
             }
         }
+        return res;
     }
     //maxLevel:
     //          1
@@ -518,11 +519,7 @@ public class Solution {
         root.left = new Node(2);
         root.right = new Node(3);
         root.left.left = new Node(4);
-        root.right.right = new Node(5);
-        System.out.println(levelOrder_layer(root));
-        System.out.println(serialize_bfs(root));
-        //System.out.println(serialize_dfs(root));
-        Node decode = deserialize(serialize_bfs(root));
-        System.out.println(serialize_bfs(decode));
+        root.left.right = new Node(5);
+        System.out.println(stackPostorder(root));
     }
 }
