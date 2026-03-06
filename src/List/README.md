@@ -135,7 +135,7 @@ public void reverse(){
 
 
 
-
+---
 ## *3.Simple linklist problems*
 
 ### `findMid` ：找出中间node
@@ -165,6 +165,7 @@ time-complexity: **O(n)**
 
 space-complexity: **O(1)**
 
+---
 ### `mergesort`：归并排序
 
 即对于一个list进行递归地拆分成sublists，再通过对sublists里的nodes比大小，最终merge成一个sorting list的操作。
@@ -263,7 +264,7 @@ time-complexity: **O(nlogn)**
 space-complexity: **O(nlogn)**
 
 
-
+---
 ### `oddFront`:  奇数在前
 
 即我们把一个list里的所有奇数都放在前面，偶数都放在后面。
@@ -306,7 +307,7 @@ time-complexity: **O(n)**
 space-complexity: **O(n)**
 
 
-
+---
 ### `resort`： 后半段reverse再间隔连接
 
 Example：1->2->3->4->5->null
@@ -354,10 +355,19 @@ time-complexity: **O(n)**
 space-complexity: **O(n)**
 
 
-
+---
 ### `commonNode`: 寻找公共node
+```mermaid
+ graph TD
+     1-->2
+     2-->3
+     3-->4
+     4-->5
+     7-->6
+     6-->3
+```
 
-假设有两个list穿过一个common node，我们需要return这个node。
+假设有两个list穿过一个common node，我们需要return这个node。如图中的**节点3**。
 
 思路：我们设置两个指针分别从两个list的head开始往后遍历，当遍历完该list之后，紧接着连接另一个list，当两个指针相交的时候，该节点就是common node。
 
@@ -381,9 +391,13 @@ time-complexity: **O(n+m)**
 space-complexity: **O(1)**
 
 
-
+---
 ### `isRing`: 判断list是否成环
-
+```mermaid
+ graph TD
+     1-->2-->3
+     3-->2
+```
 思路：运用快慢指针，如果list成环，快指针一定会重新与慢指针相交
 
 ```java
@@ -407,8 +421,13 @@ time-complexity: **O(n)**
 space-complexity: **O(1)**
 
 
-
+---
 ### `ringEntryNode`: 找出入环点
+```mermaid
+ graph TD
+     1-->2-->3
+     3-->2
+```
 
 思路：基于`isRing`的方法，当快慢指针相遇之后，我们让快指针重新回到head，但这次跟慢指针一样one by one遍历，当他们第二次相交的时候，该节点就是入环点。
 
@@ -441,7 +460,7 @@ time-complexity: **O(n)**
 space-complexity: **O(1)**
 
 
-
+---
 ## *4. A Little complicated Linklist problems*
 
 这一节的算法题主要麻烦在链表的拆分和连接上。
@@ -481,12 +500,14 @@ time-complexity: **O(n)**
 space-complexity: **O(1)**
 
 
-
+---
 ### `reverseByK`: reverse k by k
 
-Example: if k = 2 `reverseByK` => `reverseByCouple`
+Example: 
 
-​		 if k = 3，1->2->3->4->5->null `reverseByk`=> 3->2->1->4->5->null
+if k = 2 `reverseByK` => `reverseByCouple`
+
+if k = 3，1->2->3->4->5->null `reverseByk`=> 3->2->1->4->5->null
 
 ```java
 //reverse depend on k
