@@ -330,6 +330,22 @@ public class Solution {
         return root;
     }
 
+    public static Node commonAncestor_BST_iter(Node root, Node n1, Node n2){
+        if(root == null) return null;
+        Node cur = root;
+        while(cur != null){
+            //right side
+            if(cur.data < n1.data && cur.data < n2.data){
+                cur = cur.right;
+            }else if(cur.data > n1.data && cur.data > n2.data){
+                cur = cur.left;
+            }else{
+                break;
+            }
+        }
+        return cur;
+    }
+
     //commonAncestor
     //Example: 	2
     //
@@ -355,6 +371,7 @@ public class Solution {
         //both side
         return root;
     }
+
 
     public static void main(String[] args) {
         Node root = new Node(1);
