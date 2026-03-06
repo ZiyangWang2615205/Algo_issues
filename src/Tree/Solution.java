@@ -317,9 +317,26 @@ public class Solution {
     //
     //		1		3
     //
-    //Enter: 1,3
-    //=>`commonAncestor` return 2
+    //    4   5
+    //
+    //Enter: 4,3=>`commonAncestor` return 2 ; Enter: 4,5 => return 1
+    public static Node commonAncestor(Node root, Node n1, Node n2){
+        //termination
+        if(root == null) return null;
+        if(root == n1 || root == n2) return root;
 
+        //recursion
+        Node left = commonAncestor(root.left,n1,n2);
+        Node right = commonAncestor(root.right,n1,n2);
+
+        //no res
+        if(left == null && right == null) return null;
+        //one side
+        if(left == null) return right;
+        if(right == null) return left;
+        //both side
+        return root;
+    }
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
