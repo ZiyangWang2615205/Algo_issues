@@ -455,6 +455,37 @@ public class Solution {
         return root.data + "," + serialize_dfs(root.left) + "," + serialize_dfs(root.right);
     }
 
+    //deserialize
+    //input: string => output: level order tree
+    //
+    //                              1
+    //example: [1,2,3] =>       2       3
+    public static Node deserialize(String str){
+        if(str.equals("[]")) return null;
+        String deleteBracket = str.substring(1,str.length()-1);
+        String[] arr = str.split(",");
+        Queue<Node> queue = new LinkedList<>();
+        //create root
+        Node root = new Node(Integer.parseInt(arr[0]));
+        queue.offer(root);
+        int index = 1;
+        while(!queue.isEmpty()){
+            Node cur = queue.poll();
+            //add left
+            if(!arr[index].equals("null")){
+                cur.left = new Node(Integer.parseInt(arr[index]));
+                queue.offer(cur.left);
+            }
+            index++;
+            //add right
+            if(!arr[index].equals("null")){
+                cur.right = new Node(Integer.parseInt(arr[index]));
+                queue.offer(cur.right);
+            }
+            index++;
+        }
+        return root;
+    }
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
@@ -463,6 +494,8 @@ public class Solution {
         root.right.right = new Node(5);
         System.out.println(levelOrder_layer(root));
         System.out.println(serialize_bfs(root));
-        System.out.println(serialize_dfs(root));
+        //System.out.println(serialize_dfs(root));
+        Node decode = deserialize(serialize_bfs(root));
+        System.out.println(serialize_bfs(decode));
     }
 }
