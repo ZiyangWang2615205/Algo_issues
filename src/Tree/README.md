@@ -14,8 +14,7 @@ public class TreeNode {
         this.left = null;
         this.right = null;
     }
-    public TreeNode(){
-    }
+    public TreeNode(){}
 ```
 
 这里我们建立TreeNode，并提供TreeNode的两种创建，一种是有值节点，一种是null节点。
@@ -46,6 +45,28 @@ public static void preorder(TreeNode root){
 }
 ```
 
+以上是用recursion的方法解决`preorder`，当然我们也可以采用**_iteration+stack_**的放来做(虽然本质上recursion也是使用stack):
+
+```java
+//stackPreorder: use stack to finish preorder
+    //left-root-right
+    public static List<Integer> stackPreorder(Node root){
+        if(root == null) return new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            Node cur = stack.pop();
+            res.add(cur.data);
+            //check right and left children
+            //pay attention to order of adding
+            if(cur.right != null) stack.push(cur.right);
+            if(cur.left != null) stack.push(cur.left);
+        }
+        return res;
+    }
+```
+
 ### `inorder`
 
 Inorder的顺序遵循：左->根->右的顺序
@@ -60,6 +81,27 @@ public static void inorder(TreeNode root){
         inorder(node.right);
     }
 }
+```
+同理的附上用**_stack+iteration_**解决`inorder`：
+```java
+//stackInorder: left-root-right
+    public static List<Integer> stackInorder(Node root){
+        if(root == null) return new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+        Node cur = root;
+        while(cur != null || !stack.isEmpty()){
+            //iter add left children
+            while(cur != null){
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.pop();
+            res.add(cur.data);
+            cur = cur.right;
+        }
+        return res;
+    }
 ```
 
 ### `postorder`
@@ -78,7 +120,38 @@ public static void postorder(TreeNode root){
 }
 ```
 
-
+**_iteration+stack_**:
+```java
+ //stackPostorder: left-right-root
+    public static List<Integer> stackPostorder(Node root){
+        if(root == null) return new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+        //prev used to record if right child be accessed
+        Node prev = null;
+        Node cur = root;
+        while(cur != null || !stack.isEmpty()){
+            while(cur != null){
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.pop();
+            if(cur.right == null || cur.right == prev){
+                res.add(cur.data);
+                //avoiding cur -> right -> cur -> right...
+                prev = cur;
+                cur = null;
+            }else{
+                //if it has right children check to right
+                //push back cur
+                stack.push(cur);
+                cur = cur.right;
+            }
+        }
+        return res;
+    }
+```
+**_stack+iteration_** 的方法往往在代码的处理方面有细微的不同，而 **_recursion_** 的方法却只是recursion顺序的变化。
 
 ## *3.Simple Tree Questions*
 
