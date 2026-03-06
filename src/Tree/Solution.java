@@ -261,16 +261,41 @@ public class Solution {
         return stackPreorder(root);
     }
 
-    //public static List<Integer> BST_to_preorder_recur(Node root){
-    //}
+    public static void BST_to_preorder_bruce(Node root){
+        if(root == null) return;
+        if(root.left == null && root.right == null) return;
+
+        Node cur = root;
+        while(cur != null){
+            if(cur.left != null){
+                //record break point
+                Node leftBreak = cur.left;
+                Node rightConnect = cur.left;
+
+                //find the rightest points
+                while(rightConnect.right != null){
+                    rightConnect = rightConnect.right;
+                }
+
+                //connect
+                rightConnect.right = cur.right;
+                cur.left = null;
+                cur.right = leftBreak;
+            }else{
+                cur = cur.right;
+            }
+        }
+    }
 
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
         root.left.left = new Node(3);
-        //System.out.println(calc_path_sum(root));
-        //System.out.println(target_Eql_pathSum(root,3));
-        System.out.println(target_pathSum_anyway(root,3));
+        BST_to_preorder_bruce(root);
+        while(root != null){
+            System.out.println(root.data);
+            root = root.right;
+        }
     }
 }
