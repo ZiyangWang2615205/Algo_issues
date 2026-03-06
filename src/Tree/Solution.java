@@ -414,6 +414,33 @@ public class Solution {
         return res;
     }
 
+    //serialize
+    //input: level order tree => output: string
+    //Example: 	1
+    //
+    //		2		3
+    //
+    //    4            5
+    //=>`serialize` return "1,2,3,4,null,null,5,null,null,null,null"
+    public static String serialize_bfs(Node root){
+        if(root == null) return "";
+        StringBuilder sb = new StringBuilder();
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            Node cur = queue.poll();
+            if(cur == null){
+                sb.append("null");
+            }else{
+                sb.append(cur.data);
+                queue.offer(cur.left);
+                queue.offer(cur.right);
+            }
+            sb.append(",");
+        }
+        return sb.substring(0,sb.length()-1);
+    }
+
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
@@ -421,5 +448,6 @@ public class Solution {
         root.left.left = new Node(4);
         root.right.right = new Node(5);
         System.out.println(levelOrder_layer(root));
+        System.out.println(serialize_bfs(root));
     }
 }
