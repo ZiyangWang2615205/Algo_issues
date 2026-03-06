@@ -68,6 +68,33 @@ public class Solution {
         return res;
     }
 
+    //stackPostorder: left-right-root
+    public static List<Integer> stackPostorder(Node root){
+        if(root == null) return new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+        //prev used to record if right child be accessed
+        Node prev = null;
+        Node cur = root;
+        while(cur != null || !stack.isEmpty()){
+            while(cur != null){
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.pop();
+            if(cur.right == null || cur.right == prev){
+                res.add(cur.data);
+                //avoiding cur -> right -> cur -> right...
+                prev = cur;
+                cur = null;
+            }else{
+                //if it has right children check to right
+                //push back cur
+                stack.push(cur);
+                cur = cur.right;
+            }
+        }
+    }
     //maxLevel:
     //          1
     //
