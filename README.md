@@ -3,7 +3,7 @@ Used for recording some Algorithm and Leetcode problems that I've finished
 
 ## Content:
 - [Overview](#Overview)
-- [Linklist Questions](#linklist-questions)
+- [Categories](#categories)
 
 ## Overview
 I have divided all questions as different parts: **linklist/tree/graph/design**...
