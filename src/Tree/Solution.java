@@ -312,6 +312,14 @@ public class Solution {
         return null;
     }
 
+    //commonAncestor
+    //Example: 	2
+    //
+    //		1		3
+    //
+    //Enter: 1,3
+    //=>`commonAncestor` return 2
+
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
