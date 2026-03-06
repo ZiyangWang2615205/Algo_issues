@@ -16,6 +16,14 @@ Each part has its own **solutions/review/notes**
 
 **Notes** record the analysis of questions which include mind map and time/space complexity
 
+## Categories
+
+| Category    | Problems                 |
+|-------------|--------------------------|
+| Linked List | [Go](src/list/README.md) |
+| Binary Tree | [Go](tree/README.md)     |
+
+
 ## Linklist Questions:
 - [Basic Method of Linklist](#basic-method-of-linklist)
 - [Simple Algorithm Problem](#simple-algorithm-problem)
