@@ -312,6 +312,24 @@ public class Solution {
         return null;
     }
 
+    //commonAncestor_BST
+    public static Node commonAncestor_BST(Node root,Node n1,Node n2){
+        if(root == null) return null;
+        //don't consider equal situation, otherwise we will miss this:
+        //          20
+        //
+        //      10(n1)
+        //
+        //  5(n2)
+        if(root.data > n1.data && root.data > n2.data){
+            return commonAncestor_BST(root.right,n1,n2);
+        }
+        if(root.data < n1.data && root.data < n2.data){
+            return commonAncestor_BST(root.left,n1,n2);
+        }
+        return root;
+    }
+
     //commonAncestor
     //Example: 	2
     //
@@ -337,6 +355,7 @@ public class Solution {
         //both side
         return root;
     }
+
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
