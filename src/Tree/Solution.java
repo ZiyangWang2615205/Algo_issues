@@ -389,6 +389,30 @@ public class Solution {
         return res;
     }
 
+    //level order
+    //Example: 	1
+    //
+    //		2		3
+    //
+    //=>`level_order` return [[1],[2,3]]
+    public static List<List<Integer>> levelOrder_layer(Node root){
+        if(root == null) return new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int length = queue.size();
+            List<Integer> layer = new ArrayList<>();
+            for (int i = 0; i < length; i++) {
+                Node cur = queue.poll();
+                layer.add(cur.data);
+                if(cur.left != null) queue.offer(cur.left);
+                if(cur.right != null) queue.offer(cur.right);
+            }
+            res.add(layer);
+        }
+        return res;
+    }
 
     public static void main(String[] args) {
         Node root = new Node(1);
@@ -396,6 +420,6 @@ public class Solution {
         root.right = new Node(3);
         root.left.left = new Node(4);
         root.right.right = new Node(5);
-        System.out.println(level_order(root));
+        System.out.println(levelOrder_layer(root));
     }
 }
