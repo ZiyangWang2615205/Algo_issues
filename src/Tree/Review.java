@@ -85,12 +85,48 @@ public class Review {
     }
 
     //target2
+    public static int targetEql2(Node root, int target){
+        if(root == null) return 0;
+        int sum = auxOfTarget(root,0,target);
+        sum += targetEql2(root.left,target);
+        sum += targetEql2(root.right,target);
+        return sum;
+    }
+
     //bruce flatten
+    public static void bruce_flatten(Node root){
+        if(root == null) return;
+        if(root.left == null && root.right == null) return;
+        Node cur = root;
+        while(cur != null){
+            if(cur.left != null){
+                Node leftBreak = cur.left;
+                Node rightConnect = cur.left;
+
+                while(rightConnect.right != null){
+                    rightConnect = rightConnect.right;
+                }
+
+                rightConnect.right = cur.right;
+                cur.left = null;
+                cur.right = leftBreak;
+            }else {
+                cur = cur.right;
+            }
+        }
+        return;
+    }
+
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
-        root.right = new Node(3);
-        System.out.println(calcPathSum(root));
-        System.out.println(targetEql(root, 3));
+        root.left.left = new Node(3);
+        root.left.right = new Node(4);
+        root.right = new Node(5);
+       bruce_flatten(root);
+       while(root != null){
+           System.out.println(root.data);
+           root = root.right;
+       }
     }
 }
