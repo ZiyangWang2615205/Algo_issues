@@ -287,15 +287,36 @@ public class Solution {
         }
     }
 
+    //kth_smallestOfBST:
+    //find the node of BST which is the k th smallest
+    public static Node kth_smallestOfBST(Node root, int k){
+        if(root == null || k < 1) return null;
+        if(root.left == null && root.right == null) return root;
+
+        Stack<Node> stack = new Stack<>();
+        int count = 0;
+        Node cur = root;
+
+        while(!stack.isEmpty() || cur != null){
+            while(cur != null){
+                stack.push(cur);
+                cur = cur.left;
+            }
+
+            cur = stack.pop();
+            count++;
+            if(count == k) return cur;
+            cur = cur.right;
+        }
+
+        return null;
+    }
+
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
-        root.left.left = new Node(3);
-        BST_to_preorder_bruce(root);
-        while(root != null){
-            System.out.println(root.data);
-            root = root.right;
-        }
+        Node test = arrToBST(new int[]{1,1,0,2,3,4,5,6,7,8});
+        System.out.println(kth_smallestOfBST(test, 2));
     }
 }
