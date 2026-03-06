@@ -1,9 +1,6 @@
 package Tree;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class Solution {
     //order method:
@@ -372,12 +369,33 @@ public class Solution {
         return root;
     }
 
-// add
+    //level order
+    //Example: 	1
+    //
+    //		2		3
+    //
+    //=>`level_order` return [1,2,3]
+    public static List<Integer> level_order(Node root){
+        if(root == null) return new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            Node cur = queue.poll();
+            res.add(cur.data);
+            if(cur.left != null) queue.offer(cur.left);
+            if(cur.right != null) queue.offer(cur.right);
+        }
+        return res;
+    }
+
+
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
-        Node test = arrToBST(new int[]{1,1,0,2,3,4,5,6,7,8});
-        System.out.println(kth_smallestOfBST(test, 2));
+        root.left.left = new Node(4);
+        root.right.right = new Node(5);
+        System.out.println(level_order(root));
     }
 }
