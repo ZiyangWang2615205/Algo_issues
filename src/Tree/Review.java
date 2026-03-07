@@ -131,6 +131,21 @@ public class Review {
         return root;
     }
     //commonAncestor_BST: both iter and recur method
+    public static Node commonAncestor_iter_BST(Node root, Node n1, Node n2){
+        if(root == null) return null;
+        Node cur = root;
+        while(cur != null){
+           if(cur.data > n1.data && cur.data > n2.data){ //both left
+               cur = cur.left;
+           }else if(cur.data < n1.data && cur.data < n2.data){ //both right
+               cur = cur.right;
+           }else {
+               break;
+           }
+       }
+        return cur;
+    }
+
     //serialize(bfs)
     //deserialize
     //stackPostorder
