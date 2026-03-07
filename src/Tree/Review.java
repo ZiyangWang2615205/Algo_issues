@@ -158,6 +158,26 @@ public class Review {
     }
 
     //serialize(bfs)
+    public static String serialize(Node root){
+        if(root == null) return "";
+        StringBuilder sb = new StringBuilder();
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            Node cur = queue.poll();
+            if(cur == null){
+                sb.append("null");
+            }else{
+                sb.append(cur.data);
+                if(cur.left != null || cur.right != null){
+                    queue.offer(cur.left);
+                    queue.offer(cur.right);
+                }
+            }
+            sb.append(",");
+        }
+        return sb.substring(0,sb.length()-1);
+    }
     //deserialize
     //stackPostorder
 
@@ -166,7 +186,6 @@ public class Review {
         root.left = new Node(2);
         root.left.left = new Node(1);
         root.right = new Node(5);
-        System.out.println(commonAncestor_recur_BST(root, root.left, root.right).data);
-        System.out.println(commonAncestor_recur_BST(root, root.left.left, root.left).data);
+        System.out.println(serialize(root));
     }
 }
