@@ -158,48 +158,7 @@ public class Review {
     }
 
     //serialize(bfs)
-    public static String serialize(Node root){
-        if(root == null) return "";
-        StringBuilder sb = new StringBuilder();
-        Queue<Node> queue = new LinkedList<>();
-        queue.offer(root);
-        while(!queue.isEmpty()){
-            Node cur = queue.poll();
-            if(cur == null){
-                sb.append("null");
-            }else{
-                sb.append(cur.data);
-                queue.offer(cur.left);
-                queue.offer(cur.right);
-            }
-            sb.append(",");
-        }
-        return sb.substring(0,sb.length()-1);
-    }
     //deserialize
-    public static Node deserialize(String str){
-        if(str.equals("")) return null;
-        String[] arr = str.split(",");
-        Queue<Node> queue = new LinkedList<>();
-        //create root
-        Node root = new Node(Integer.parseInt(arr[0]));
-        queue.offer(root);
-        int index = 1;
-        while(!queue.isEmpty()){
-            Node cur = queue.poll();
-            if(!arr[index].equals("null")){
-                cur.left = new Node(Integer.parseInt(arr[index]));
-                queue.offer(cur.left);
-            }
-            index++;
-            if(!arr[index].equals("null")){
-                cur.right = new Node(Integer.parseInt(arr[index]));
-                queue.offer(cur.right);
-            }
-            index++;
-        }
-        return root;
-    }
     //stackPostorder
 
     public static void main(String[] args) {
@@ -207,7 +166,5 @@ public class Review {
         root.left = new Node(2);
         root.left.left = new Node(1);
         root.right = new Node(5);
-        System.out.println(serialize(root));
-        System.out.println(serialize(deserialize(serialize(root))));
     }
 }
