@@ -118,6 +118,18 @@ public class Review {
     }
 
     //commonAncestor
+    public static Node commonAncestor(Node root, Node n1, Node n2){
+        if(root == null) return null;
+        if(root == n1 || root == n2) return root;
+
+        Node left = commonAncestor(root.left,n1,n2);
+        Node right = commonAncestor(root.right,n1,n2);
+
+        if(left == null && right == null) return null;
+        if(left == null) return right;
+        if(right == null) return left;
+        return root;
+    }
     //commonAncestor_BST: both iter and recur method
     //serialize(bfs)
     //deserialize
@@ -126,13 +138,10 @@ public class Review {
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
-        root.left.left = new Node(3);
-        root.left.right = new Node(4);
-        root.right = new Node(5);
-       bruce_flatten(root);
-       while(root != null){
-           System.out.println(root.data);
-           root = root.right;
-       }
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        root.right = new Node(3);
+        System.out.println(commonAncestor(root, root.left, root.right).data);
+        System.out.println(commonAncestor(root, root.left.left, root.left).data);
     }
 }
