@@ -497,7 +497,7 @@ public class Solution {
         Node root = new Node(Integer.parseInt(arr[0]));
         queue.offer(root);
         int index = 1;
-        while(!queue.isEmpty()){
+        while(!queue.isEmpty() && index < arr.length){
             Node cur = queue.poll();
             //add left
             if(!arr[index].equals("null")){
