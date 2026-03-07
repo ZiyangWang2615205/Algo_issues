@@ -146,17 +146,27 @@ public class Review {
         return cur;
     }
 
+    public static Node commonAncestor_recur_BST(Node root, Node n1, Node n2){
+        if(root == null) return null;
+        if(root.data < n1.data && root.data < n2.data){//both right
+            return commonAncestor_recur_BST(root.right,n1,n2);
+        }
+        if(root.data > n1.data && root.data > n2.data){//both left
+            return commonAncestor_recur_BST(root.left,n1,n2);
+        }
+        return root;
+    }
+
     //serialize(bfs)
     //deserialize
     //stackPostorder
 
     public static void main(String[] args) {
-        Node root = new Node(1);
+        Node root = new Node(3);
         root.left = new Node(2);
-        root.left.left = new Node(4);
-        root.left.right = new Node(5);
-        root.right = new Node(3);
-        System.out.println(commonAncestor(root, root.left, root.right).data);
-        System.out.println(commonAncestor(root, root.left.left, root.left).data);
+        root.left.left = new Node(1);
+        root.right = new Node(5);
+        System.out.println(commonAncestor_recur_BST(root, root.left, root.right).data);
+        System.out.println(commonAncestor_recur_BST(root, root.left.left, root.left).data);
     }
 }
