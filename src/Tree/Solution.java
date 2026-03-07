@@ -489,27 +489,31 @@ public class Solution {
     //                              1
     //example: [1,2,3] =>       2       3
     public static Node deserialize(String str){
-        if(str.equals("[]")) return null;
-        String deleteBracket = str.substring(1,str.length()-1);
-        String[] arr = str.split(",");
+        if(str.equals("")) return null;
         Queue<Node> queue = new LinkedList<>();
+        //split string
+        String[] strArr = str.split(",");
         //create root
-        Node root = new Node(Integer.parseInt(arr[0]));
-        queue.offer(root);
+        Node root = new Node(Integer.parseInt(strArr[0]));
+        queue.add(root);
+        //create index of strArr
         int index = 1;
-        while(!queue.isEmpty() && index < arr.length){
-            Node cur = queue.poll();
-            //add left
-            if(!arr[index].equals("null")){
-                cur.left = new Node(Integer.parseInt(arr[index]));
-                queue.offer(cur.left);
+        while(!queue.isEmpty()){
+            //get current node
+            Node current = queue.poll();
+            //connect left
+            if(!strArr[index].equals("null")){
+                current.left = new Node(Integer.parseInt(strArr[index]));
+                queue.add(current.left);
             }
+            //updates index
             index++;
-            //add right
-            if(!arr[index].equals("null")){
-                cur.right = new Node(Integer.parseInt(arr[index]));
-                queue.offer(cur.right);
+            //connect right
+            if(!strArr[index].equals("null")){
+                current.right = new Node(Integer.parseInt(strArr[index]));
+                queue.add(current.right);
             }
+            //updates index
             index++;
         }
         return root;
@@ -520,6 +524,6 @@ public class Solution {
         root.right = new Node(3);
         root.left.left = new Node(4);
         root.left.right = new Node(5);
-        System.out.println(stackPostorder(root));
+        System.out.println(serialize_bfs(deserialize(serialize_bfs(root))));
     }
 }
