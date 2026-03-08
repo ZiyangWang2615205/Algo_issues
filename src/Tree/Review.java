@@ -159,7 +159,30 @@ public class Review {
 
     //serialize(bfs)
     //deserialize
-    //stackPostorder
+    //stackPostorder: left-right-root
+    public static List<Integer> post_order(Node root){
+        if(root == null) return new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+        Node prev = null;
+        Node cur = root;
+        while(!stack.isEmpty() || cur != null){
+            while(cur != null){
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.pop();
+            if(cur.right == null || cur.right == prev){
+                res.add(cur.data);
+                prev = cur;
+                cur = null;
+            }else{
+                stack.push(cur);
+                cur = cur.right;
+            }
+        }
+        return res;
+    }
 
     public static void main(String[] args) {
         Node root = new Node(3);
