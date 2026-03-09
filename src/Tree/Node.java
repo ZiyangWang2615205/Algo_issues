@@ -1,10 +1,5 @@
 package Tree;
 
-import java.net.Inet4Address;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
 
 public class Node {
     int data;
