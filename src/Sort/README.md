@@ -52,7 +52,7 @@ sorting method以`decision tree`作为分界线。
 for example: array被分成了A，B两个subarray， 对比方式为 A1/B1，若A1小则A1放入新array，
 接着比A2/B1...
 
-在Linklist Questions中我们也涉及过该方法，具体见[Direct to Linklist Mergesort](Tree/README.md/###mergesort:归并排序)
+在Linklist Questions中我们也涉及过该方法，具体见[Linklist Mergesort](../List/README.md#mergesort归并排序)
 
 ```java
  //merge sort -- divide and conquer
