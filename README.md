@@ -22,4 +22,4 @@ Each part has its own **solutions/review/notes**
 |-------------------------------|-----------------|
 | Linked List Questions & Notes | [Go](src/List/) |
 | Binary Tree Questions & Notes | [Go](src/Tree/) |
-
+| Sorting Questions & Notes     | [Go](src/Sort/) |
