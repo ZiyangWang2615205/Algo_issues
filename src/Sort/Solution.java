@@ -59,6 +59,37 @@ public class Solution {
         return conquer(left,right);
     }
 
+    //quick sort
+    public static void exchange(int[] arr, int left, int right){
+        int temp = arr[left];
+        arr[left] = arr[right];
+        arr[right] = temp;
+        return;
+    }
+    public static int partition(int[] arr, int left, int right){
+        int privot = arr[right];
+        int i = -1;
+        for (int j = left; j < right; j++) {
+            if(arr[left] <= privot){
+                i++;
+                exchange(arr,i,j);
+            }
+        }
+        exchange(arr,i+1,right);
+        return i+1;
+    }
+    public static void helper_quick(int[] arr, int left, int right){
+        if(left >= right) return;
+        int privotIndex = partition(arr,left,right);
+        helper_quick(arr,left,privotIndex-1);
+        helper_quick(arr,privotIndex+1,right);
+    }
+    public static int[] quick_sort(int[] arr){
+        if(arr.length <= 1) return arr;
+        helper_quick(arr,0,arr.length-1);
+        return arr;
+    }
+
     public static void main(String[] args) {
         int[] arr = new int[]{8,6,5,4,3,8,7};
         for(int i : insertion(arr)){
@@ -66,6 +97,10 @@ public class Solution {
         }
         System.out.println();
         for(int i : merge_sort(arr)){
+            System.out.print(i);
+        }
+        System.out.println();
+        for(int i : quick_sort(arr)){
             System.out.print(i);
         }
     }
