@@ -1,7 +1,7 @@
 # _Design Problems_
 
 
-## Browser History Creation:
+## _Browser History Creation:_
 
 请设计一个数据结构来模拟浏览器的历史记录功能。
 
@@ -73,18 +73,6 @@ public class BrowserHistory {
             toBack.push(toForward.pop());
         }
         return toBack.peek();
-    }
-
-    public static void main(String[] args) {
-        BrowserHistory bh = new BrowserHistory("google.com");
-        bh.visit("uob.com");
-        bh.visit("blackboard.com");
-        bh.visit("timmy.com");
-        System.out.println(bh.back(2));//uob
-        System.out.println(bh.forward(1));//blackboard
-        bh.visit("tom.com");
-        System.out.println(bh.back(1));//bla
-        System.out.println(bh.forward(1));//tom
     }
 }
 ```
