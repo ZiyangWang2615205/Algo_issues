@@ -28,6 +28,7 @@ public class Linklist {
     public Linklist(){
         this.head = null;
     }
+}
 ```
 
 Linklist的建立可以设置头节点为空或不为空。
