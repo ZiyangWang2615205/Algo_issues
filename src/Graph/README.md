@@ -1,10 +1,16 @@
-package Graph;
+# _Graph Questions_
 
-import java.util.*;
+## 1. Basic Questions
+首先是一些比较简单的问题，作为我们练习的切入点：
++ print the graph clockwise
++ find the target in incremental matrix
++ create the matrix and val is its own serial num
++ if grid apper zero set its col and row as zero as well
 
-public class Solution {
-    //clockwise_print
-    public static List<Integer> spiralOrder(int[][] matrix){
+### `spiralOrder`
+顾名思义，使用clockwise的顺序遍历graph即可。
+```java
+ public static List<Integer> spiralOrder(int[][] matrix){
         if(matrix.length == 0) return new ArrayList<>();
         List<Integer> res = new ArrayList<>();
         int left =0 ,top = 0;
@@ -38,10 +44,21 @@ public class Solution {
         }
         return res;
     }
+```
+**time**-complexity: **O(n^2)**
 
-    public static void main(String[] args) {
-        int[][] matrix = new int[][]{{1,2,3},{8,9,4},{7,6,5}};
-        //check clockwise
-        System.out.println(spiralOrder(matrix));
-    }
-}
+**space**-complexity: **O(n^2)**
+
+
+---
+## 2. DFS Used Questions
+接着是我们在graph里用dfs解决的一些问题：
++ find the maximum land area in graph
++ calc the num of lands in graph
++ find the word in char board
++ fill the same colour in the same val grid
++ calc the perimeter of land
+
+---
+## 3. Backtrack Used Questions
+即在graph里使用backtrack解决的问题：
