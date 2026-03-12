@@ -18,9 +18,10 @@ Each part has its own **solutions/review/notes**
 
 ## Categories
 
-| Category                      | Problems        |
-|-------------------------------|-----------------|
-| Linked List Questions & Notes | [Go](src/List/) |
-| Binary Tree Questions & Notes | [Go](src/Tree/) |
-| Sorting Questions & Notes     | [Go](src/Sort/) |
-|Graph Questions & Notes        | [Go](src/Graph/)|
+| Category                      | Problems          |
+|-------------------------------|-------------------|
+| Linked List Questions & Notes | [Go](src/List/)   |
+| Binary Tree Questions & Notes | [Go](src/Tree/)   |
+| Sorting Questions & Notes     | [Go](src/Sort/)   |
+| Graph Questions & Notes       | [Go](src/Graph/)  |
+| Design Questions & Notes      | [Go](src/Design/) |
