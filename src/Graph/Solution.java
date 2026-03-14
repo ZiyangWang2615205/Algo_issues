@@ -75,14 +75,56 @@ public class Solution {
         }
         return false;
     }
+
+    //create the matrix and val is its own serial num by clockwise
+    //example: enter n = 3:
+    //         [1,2,3]
+    //         [8,9,4]
+    //         [7,6,5]
+    public static int[][] buildMatrix(int n){
+        if(n == 0) return new int[][]{};
+        int[][] matrix = new int[n][n];
+        //create 1->n*n
+        int[] arr = new int[n*n];
+        for (int i = 0; i < n*n; i++) {
+            arr[i] = i+1;
+        }
+        //spiral order adding
+        int left = 0, top = 0;
+        int right = matrix[0].length-1;
+        int bot = matrix.length-1;
+        int index = 0;
+        while(true){
+            //l -> r
+            for (int i = left; i <= right; i++) {
+                matrix[top][i] = arr[index++];
+            }
+            if(++top > bot) break;
+            //t -> b
+            for (int i = top; i <= bot; i++) {
+                matrix[i][right] = arr[index++];
+            }
+            if(--right < left) break;
+            //r -> l
+            for (int i = right; i >= left; i--) {
+                matrix[bot][i] = arr[index++];
+            }
+            if(--bot < top) break;
+            //b -> t
+            for (int i = bot; i >= top; i--) {
+                matrix[i][left] = arr[index++];
+            }
+            if(++left > right) break;
+        }
+        return matrix;
+    }
     public static void main(String[] args) {
         int[][] matrix = new int[][]{{1,2,3},{8,9,4},{7,6,5}};
         //check clockwise
         System.out.println(spiralOrder(matrix));
         //search target in incremental matrix
         int[][] increment = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
-        if(searchTarget(increment,6)){
-            System.out.println("true");
-        }
+        //check build matrix
+        System.out.println(spiralOrder(buildMatrix(4)));
     }
 }
