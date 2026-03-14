@@ -2,10 +2,10 @@
 
 ## 1. Basic Questions
 首先是一些比较简单的问题，作为我们练习的切入点：
-+ print the graph clockwise
-+ find the target in incremental matrix
-+ create the matrix and val is its own serial num
-+ if grid apper zero set its col and row as zero as well
++ **print the graph clockwise**
++ **find the target in incremental matrix**
++ **create the matrix and val is its own serial num**
++ **if grid apper zero set its col and row as zero as well**
 
 ### `spiralOrder`
 顾名思义，使用clockwise的顺序遍历graph即可。
@@ -53,11 +53,11 @@
 ---
 ## 2. DFS Used Questions
 接着是我们在graph里用dfs解决的一些问题：
-+ find the maximum land area in graph
-+ calc the num of lands in graph
-+ find the word in char board
-+ fill the same colour in the same val grid
-+ calc the perimeter of land
++ **find the maximum land area in graph**
++ **calc the num of lands in graph**
++ **find the word in char board**
++ **fill the same colour in the same val grid**
++ **calc the perimeter of land**
 
 ---
 ## 3. Backtrack Used Questions
