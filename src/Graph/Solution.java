@@ -118,13 +118,52 @@ public class Solution {
         }
         return matrix;
     }
+
+    //setZero: if val of current grid = 0 then all grids of its col and row should be zero
+    //example:
+    //         [1,0,3]
+    //         [8,9,4]
+    //         [7,6,5]
+    //
+    // =>      [0,0,0]
+    //         [8,0,4]
+    //         [7,0,5]
+
+    public static int[][] setZero(int[][] matrix){
+        if(matrix.length == 0) return new int[][]{};
+        int y_length = matrix.length;
+        int x_length = matrix[0].length;
+        boolean[] rowSetZero = new boolean[y_length];
+        boolean[] colSetZero = new boolean[x_length];
+
+        for (int i = 0; i < y_length; i++) {
+            for (int j = 0; j < x_length; j++) {
+                if(matrix[i][j] == 0){
+                    rowSetZero[i] = true;
+                    colSetZero[j] = true;
+                }
+            }
+        }
+
+        for (int i = 0; i < y_length; i++) {
+            for (int j = 0; j < x_length; j++) {
+                if(rowSetZero[i] || colSetZero[j]){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        return matrix;
+    }
     public static void main(String[] args) {
-        int[][] matrix = new int[][]{{1,2,3},{8,9,4},{7,6,5}};
+        int[][] matrix = new int[][]{{1,0,3},{8,9,4},{7,6,5}};
         //check clockwise
         System.out.println(spiralOrder(matrix));
         //search target in incremental matrix
         int[][] increment = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
         //check build matrix
         System.out.println(spiralOrder(buildMatrix(4)));
+        //check set zero
+        System.out.println(spiralOrder(setZero(matrix)));
     }
 }
