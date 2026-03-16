@@ -49,6 +49,53 @@
 
 **space**-complexity: **O(n^2)**
 
+---
+### `searchTarget`
+即在一个**incremental martix**里寻找是否存在input值，若存在返回`true`，不存在返回`false`。
+由于我们的matrix是**increment**的，因此我们可以采用 **_binary search_** 的思路缩小时间复杂度，分别对row/column进行搜索。
+```java
+//searchTarget: search target in incremental matrix(right>left,bot>top)
+    public static boolean searchTarget(int[][] matrix, int target){
+        if(matrix.length == 0) return false;
+        //matrix info
+        int top = 0, left = 0;
+        int bot = matrix.length-1;
+        int right = matrix[0].length-1;
+
+        //search col
+        int low = top;
+        int high = bot;
+        while(low <= high){
+            int mid = (low+high)/2;
+            if(matrix[mid][0] == target) return true;
+            if(matrix[mid][0] < target){
+                low = mid+1;
+            }else{
+                high = mid-1;
+            }
+        }
+        int col = high;
+
+        //search row
+        low = left;
+        high = right;
+        while(low <= high){
+            int mid = (low+high)/2;
+            if(matrix[col][mid] == target) return true;
+            if(matrix[col][mid] < target){
+                low = mid+1;
+            }else{
+                high = mid-1;
+            }
+        }
+        return false;
+    }
+
+```
+
+**time**-complexity = **O(log m + log n)**
+
+**space**-complexity = **O(1)**
 
 ---
 ## 2. DFS Used Questions
