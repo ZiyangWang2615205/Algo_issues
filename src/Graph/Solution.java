@@ -155,6 +155,31 @@ public class Solution {
 
         return matrix;
     }
+
+    //Sea and Land graph problems
+    //knowing that sea-0, land-1
+
+    //maxLandArea: return the maximum land area based on given graph
+    public static int dfsMaxLand(int[][] graph, int row, int col){
+        if(row >= graph.length || col >= graph[0].length || row < 0 || col < 0) return 0;
+        //except for sea and visited land
+        if(graph[row][col] == 0 || graph[row][col] == 2) return 0;
+
+        graph[row][col] = 2;
+        return 1+dfsMaxLand(graph,row-1,col)+dfsMaxLand(graph,row+1,col)+dfsMaxLand(graph,row,col-1)+dfsMaxLand(graph,row,col+1);
+    }
+    public static int maxLandArea(int[][] graph){
+        if(graph.length == 0) return 0;
+        int res = 0;
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = 0; j < graph[0].length; j++) {
+                if(graph[i][j] == 1){
+                    res = Math.max(res,dfsMaxLand(graph,i,j));
+                }
+            }
+        }
+        return res;
+    }
     public static void main(String[] args) {
         int[][] matrix = new int[][]{{1,0,3},{8,9,4},{7,6,5}};
         //check clockwise
@@ -165,5 +190,7 @@ public class Solution {
         System.out.println(spiralOrder(buildMatrix(4)));
         //check set zero
         System.out.println(spiralOrder(setZero(matrix)));
+        //check max land area
+        System.out.println(maxLandArea(new int[][]{{1, 0, 1}, {0, 0, 0}, {0, 0, 1}}));
     }
 }
