@@ -45,9 +45,9 @@
         return res;
     }
 ```
-**time**-complexity: **O(n^2)**
+**time**-complexity: **O(mn)**
 
-**space**-complexity: **O(n^2)**
+**space**-complexity: **O(mn)**
 
 ---
 ### `searchTarget`
@@ -96,6 +96,103 @@
 **time**-complexity = **O(log m + log n)**
 
 **space**-complexity = **O(1)**
+
+---
+
+### `buildMatrix`
+思路就是按照spiral order的顺序添加elements即可
+
+```java
+public static int[][] buildMatrix(int n){
+        if(n == 0) return new int[][]{};
+        int[][] matrix = new int[n][n];
+        //create 1->n*n
+        int[] arr = new int[n*n];
+        for (int i = 0; i < n*n; i++) {
+            arr[i] = i+1;
+        }
+        //spiral order adding
+        int left = 0, top = 0;
+        int right = matrix[0].length-1;
+        int bot = matrix.length-1;
+        int index = 0;
+        while(true){
+            //l -> r
+            for (int i = left; i <= right; i++) {
+                matrix[top][i] = arr[index++];
+            }
+            if(++top > bot) break;
+            //t -> b
+            for (int i = top; i <= bot; i++) {
+                matrix[i][right] = arr[index++];
+            }
+            if(--right < left) break;
+            //r -> l
+            for (int i = right; i >= left; i--) {
+                matrix[bot][i] = arr[index++];
+            }
+            if(--bot < top) break;
+            //b -> t
+            for (int i = bot; i >= top; i--) {
+                matrix[i][left] = arr[index++];
+            }
+            if(++left > right) break;
+        }
+        return matrix;
+    }
+```
+**time**-complexity : **O(n^2)**
+
+**space**-complexity : **O(n^2)**
+
+---
+### `setZero`
+即如果当前元素为0，则他所在的column和row都要设置为0。
+我们采用创建数组record需要存0的column和row:
+
+```java
+//setZero: if val of current grid = 0 then all grids of its col and row should be zero
+    //example:
+    //         [1,0,3]
+    //         [8,9,4]
+    //         [7,6,5]
+    //
+    // =>      [0,0,0]
+    //         [8,0,4]
+    //         [7,0,5]
+
+    public static int[][] setZero(int[][] matrix){
+        if(matrix.length == 0) return new int[][]{};
+        int y_length = matrix.length;
+        int x_length = matrix[0].length;
+        boolean[] rowSetZero = new boolean[y_length];
+        boolean[] colSetZero = new boolean[x_length];
+
+        for (int i = 0; i < y_length; i++) {
+            for (int j = 0; j < x_length; j++) {
+                if(matrix[i][j] == 0){
+                    rowSetZero[i] = true;
+                    colSetZero[j] = true;
+                }
+            }
+        }
+
+        for (int i = 0; i < y_length; i++) {
+            for (int j = 0; j < x_length; j++) {
+                if(rowSetZero[i] || colSetZero[j]){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        return matrix;
+    }
+```
+**time**-complexity: **O(mn)**
+
+**space**-complexity: **O(m+n)**
+
+当然鉴于这道题我暂时没有想到减小*time complexity*的办法，因此我试图去减少*space complexity*。
 
 ---
 ## 2. DFS Used Questions
