@@ -156,6 +156,60 @@ public class Solution {
         return matrix;
     }
 
+    public static int[][] setZero_in_place(int[][] matrix){
+        if(matrix.length == 0) return new int[][]{};
+        //matrix info
+        int top = 0, left = 0;
+        int right = matrix[0].length;
+        int bot = matrix.length;
+        //initialise
+        boolean isColZero = false;
+        boolean isRowZero = false;
+
+        for (int i = top; i < bot; i++) {
+            if(matrix[i][0] == 0){
+                isColZero = true;
+                break;
+            }
+        }
+        for (int i = left; i < right; i++) {
+            if(matrix[0][i] == 0){
+                isRowZero = true;
+                break;
+            }
+        }
+
+        for (int i = top+1; i < bot; i++) {
+            for (int j = left+1; j < right; j++) {
+                if(matrix[i][j] == 0){
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+        //set zero
+        for (int i = top; i < bot; i++) {
+            for (int j = left; j < right; j++) {
+                if(matrix[i][0] == 0 || matrix[0][j] == 0){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        //set zero for heading
+        if(isRowZero){
+            for (int i = left; i < right; i++) {
+                matrix[0][i] = 0;
+            }
+        }
+        if(isColZero){
+            for (int i = top; i < bot; i++) {
+                matrix[i][0] = 0;
+            }
+        }
+
+        return matrix;
+    }
+
     //Sea and Land graph problems
     //knowing that sea-0, land-1
 
@@ -182,15 +236,17 @@ public class Solution {
     }
     public static void main(String[] args) {
         int[][] matrix = new int[][]{{1,0,3},{8,9,4},{7,6,5}};
-        //check clockwise
+        //1.check clockwise
         System.out.println(spiralOrder(matrix));
-        //search target in incremental matrix
+        //2.search target in incremental matrix
         int[][] increment = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
-        //check build matrix
+        System.out.println(searchTarget(increment, 2));
+        //3.check build matrix
         System.out.println(spiralOrder(buildMatrix(4)));
-        //check set zero
-        System.out.println(spiralOrder(setZero(matrix)));
-        //check max land area
+        //4.5.check set zero
+        //System.out.println(spiralOrder(setZero(matrix)));
+        System.out.println(spiralOrder(setZero_in_place(matrix)));
+        //6.check max land area
         System.out.println(maxLandArea(new int[][]{{1, 0, 1}, {0, 0, 0}, {0, 0, 1}}));
     }
 }
