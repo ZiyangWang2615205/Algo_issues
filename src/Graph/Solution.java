@@ -158,52 +158,48 @@ public class Solution {
 
     public static int[][] setZero_in_place(int[][] matrix){
         if(matrix.length == 0) return new int[][]{};
-        //matrix info
-        int top = 0, left = 0;
-        int right = matrix[0].length;
-        int bot = matrix.length;
-        //initialise
-        boolean isColZero = false;
-        boolean isRowZero = false;
-
-        for (int i = top; i < bot; i++) {
+        //used for check heading set zero
+        boolean col = false, row = false;
+        for (int i = 0; i < matrix.length; i++) {
             if(matrix[i][0] == 0){
-                isColZero = true;
+                col = true;
                 break;
             }
         }
-        for (int i = left; i < right; i++) {
+        for (int i = 0; i < matrix[0].length; i++) {
             if(matrix[0][i] == 0){
-                isRowZero = true;
+                row = true;
                 break;
             }
         }
 
-        for (int i = top+1; i < bot; i++) {
-            for (int j = left+1; j < right; j++) {
+        //transverse subgraph
+        for (int i = 1; i < matrix.length ; i++) {
+            for (int j = 1; j < matrix[0].length; j++) {
                 if(matrix[i][j] == 0){
                     matrix[i][0] = 0;
                     matrix[0][j] = 0;
                 }
             }
         }
-        //set zero
-        for (int i = top; i < bot; i++) {
-            for (int j = left; j < right; j++) {
-                if(matrix[i][0] == 0 || matrix[0][j] == 0){
-                    matrix[i][j] = 0;
-                }
+
+        //set zero of subgraph
+        for (int i = 1; i < matrix.length; i++) {
+            for (int j = 1; j < matrix[0].length; j++) {
+                if(matrix[i][0] == 0 || matrix[0][j] == 0) matrix[i][j] = 0;
             }
         }
-        //set zero for heading
-        if(isRowZero){
-            for (int i = left; i < right; i++) {
-                matrix[0][i] = 0;
-            }
-        }
-        if(isColZero){
-            for (int i = top; i < bot; i++) {
+
+        //set zero of heading
+        if(col){
+            for (int i = 0; i < matrix.length; i++) {
                 matrix[i][0] = 0;
+            }
+        }
+
+        if(row){
+            for (int i = 0; i < matrix[0].length; i++) {
+                matrix[0][i] = 0;
             }
         }
 
