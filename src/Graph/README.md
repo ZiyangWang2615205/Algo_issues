@@ -263,5 +263,40 @@ public static int[][] buildMatrix(int n){
 + **calc the perimeter of land**
 
 ---
+### `maxLandArea`
+input为一个graph，其中sea用0代表，land用1代表，要求返回land的最大area。
+我们使用dfs的方法返回每一片land的area然后取最大值即可。
+```java
+//Sea and Land graph problems
+    //knowing that sea-0, land-1
+
+    //maxLandArea: return the maximum land area based on given graph
+    public static int dfsMaxLand(int[][] graph, int row, int col){
+        if(row >= graph.length || col >= graph[0].length || row < 0 || col < 0) return 0;
+        //except for sea and visited land
+        if(graph[row][col] == 0 || graph[row][col] == 2) return 0;
+
+        graph[row][col] = 2;
+        //recurse neighbour
+        return 1+dfsMaxLand(graph,row-1,col)+dfsMaxLand(graph,row+1,col)+dfsMaxLand(graph,row,col-1)+dfsMaxLand(graph,row,col+1);
+    }
+    public static int maxLandArea(int[][] graph){
+        if(graph.length == 0) return 0;
+        int res = 0;
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = 0; j < graph[0].length; j++) {
+                if(graph[i][j] == 1){
+                    res = Math.max(res,dfsMaxLand(graph,i,j));
+                }
+            }
+        }
+        return res;
+    }
+```
+**time**-complexity: **O(mn)**
+
+**space**-complexity: **O(mn)** <= 考虑recursion占用的stack
+
+---
 ## 3. Backtrack Used Questions
 即在graph里使用backtrack解决的问题：
