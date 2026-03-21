@@ -259,16 +259,24 @@ public class Solution {
     public static void main(String[] args) {
         int[][] matrix = new int[][]{{1,0,3},{8,9,4},{7,6,5}};
         //1.check clockwise
-        System.out.println(spiralOrder(matrix));
+        System.out.println("spiralOrder: ");
+        System.out.print(spiralOrder(matrix));
         //2.search target in incremental matrix
         int[][] increment = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
+        System.out.print("search target: ");
         System.out.println(searchTarget(increment, 2));
         //3.check build matrix
+        System.out.print("build matrix: ");
         System.out.println(spiralOrder(buildMatrix(4)));
         //4.5.check set zero
+        System.out.print("set zero: ");
         //System.out.println(spiralOrder(setZero(matrix)));
         System.out.println(spiralOrder(setZero_in_place(matrix)));
         //6.check max land area
+        System.out.print("max land area: ");
         System.out.println(maxLandArea(new int[][]{{1, 0, 1}, {0, 0, 0}, {0, 0, 1}}));
+        //7.check land num
+        System.out.print("num of land: ");
+        System.out.print(numOfLand(new int[][]{{1,0,1},{0,0,0},{0,0,1}}));
     }
 }
