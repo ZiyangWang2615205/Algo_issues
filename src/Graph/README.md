@@ -298,5 +298,40 @@ input为一个graph，其中sea用0代表，land用1代表，要求返回land的
 **space**-complexity: **O(mn)** <= 考虑recursion占用的stack
 
 ---
+### `numOfLand`
+思路与之前一致，仍然采取dfs的方式判断是否是land，一旦判断为land，只需要计数器加一即可。
+```java
+
+ //calc num of land in graph
+    public static int numOfLand(int[][] graph){
+        if(graph.length == 0) return 0;
+        int count = 0;
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = 0; j < graph[0].length; j++) {
+                if(dfsNumOfLand(graph,i,j)){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+    public static boolean dfsNumOfLand(int[][]graph, int row, int col){
+        //over edge or sea or accessed land will be passed
+        if(row >= graph.length || col >= graph[0].length || row < 0 || col < 0) return false;
+        if(graph[row][col] == 0 || graph[row][col] == 2) return false;
+        //if it is land label itself and its neighbor
+        graph[row][col] = 2;
+        dfsNumOfLand(graph,row-1,col);
+        dfsNumOfLand(graph,row+1,col);
+        dfsNumOfLand(graph,row,col-1);
+        dfsNumOfLand(graph,row,col+1);
+        return true;
+    }
+```
+**time**-complexity: **O(mn)**
+
+**space**-complexity: **O(mn)** <= 考虑recursion占用的stack
+
+---
 ## 3. Backtrack Used Questions
 即在graph里使用backtrack解决的问题：
