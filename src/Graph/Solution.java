@@ -230,6 +230,32 @@ public class Solution {
         }
         return res;
     }
+
+    //calc num of land in graph
+    public static int numOfLand(int[][] graph){
+        if(graph.length == 0) return 0;
+        int count = 0;
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = 0; j < graph[0].length; j++) {
+                if(dfsNumOfLand(graph,i,j)){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+    public static boolean dfsNumOfLand(int[][]graph, int row, int col){
+        //over edge or sea or accessed land will be passed
+        if(row >= graph.length || col >= graph[0].length || row < 0 || col < 0) return false;
+        if(graph[row][col] == 0 || graph[row][col] == 2) return false;
+        //if it is land label itself and its neighbor
+        graph[row][col] = 2;
+        dfsNumOfLand(graph,row-1,col);
+        dfsNumOfLand(graph,row+1,col);
+        dfsNumOfLand(graph,row,col-1);
+        dfsNumOfLand(graph,row,col+1);
+        return true;
+    }
     public static void main(String[] args) {
         int[][] matrix = new int[][]{{1,0,3},{8,9,4},{7,6,5}};
         //1.check clockwise
