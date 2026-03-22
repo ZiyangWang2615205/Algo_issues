@@ -256,6 +256,37 @@ public class Solution {
         dfsNumOfLand(graph,row,col+1);
         return true;
     }
+
+    //find the word in a char board (the char should be adjacent to others)
+    public static boolean findWord(char[][] charBoard, String word){
+        if(charBoard.length == 0) return false;
+        //used record accessed element
+        boolean[][] accessed = new boolean[charBoard.length][charBoard[0].length];
+        for (int i = 0; i < charBoard.length; i++) {
+            for (int j = 0; j < charBoard[0].length; j++) {
+                if(dfsFindWord(charBoard,word,accessed,i,j,0)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public static boolean dfsFindWord(char[][] charBoard, String word, boolean[][] accessed, int row, int col, int index){
+        //terminal
+        if(index == word.length()) return true;
+        //boundary
+        if(row < 0 || row >= charBoard.length || col < 0 || col >= charBoard[0].length) return false;
+        if(accessed[row][col] || charBoard[row][col] != word.charAt(index)) return false;
+        //label
+        accessed[row][col] = true;
+        boolean res = dfsFindWord(charBoard,word,accessed,row-1,col,index+1) ||
+                      dfsFindWord(charBoard,word,accessed,row+1,col,index+1) ||
+                      dfsFindWord(charBoard,word,accessed,row,col-1,index+1) ||
+                      dfsFindWord(charBoard,word,accessed,row,col+1,index+1);
+        //backtrack label
+        accessed[row][col] = false;
+        return res;
+    }
     public static void main(String[] args) {
         int[][] matrix = new int[][]{{1,0,3},{8,9,4},{7,6,5}};
         //1.check clockwise
@@ -276,7 +307,10 @@ public class Solution {
         System.out.print("max land area: ");
         System.out.println(maxLandArea(new int[][]{{1, 0, 1}, {0, 0, 0}, {0, 0, 1}}));
         //7.check land num
-        System.out.print("num of land: ");
-        System.out.print(numOfLand(new int[][]{{1,0,1},{0,0,0},{0,0,1}}));
+        System.out.println("num of land: ");
+        System.out.println(numOfLand(new int[][]{{1,0,1},{0,0,0},{0,0,1}}));
+        //8.find the word in charBoard
+        System.out.println("The word in board");
+        System.out.println(findWord(new char[][]{{'a','b','c'},{'d','e','f'},{'g','h','j'}},"abehj"));
     }
 }
