@@ -60,15 +60,28 @@ public class Review {
     }
 
     //find max area
+    public static int maxArea(int[][] graph){
+        if (graph.length == 0) return 0;
+        int res = 0;
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = 0; j < graph[0].length; j++) {
+                if(graph[i][j] == 1){
+                    res = Math.max(res,dfsMaxArea(graph,i,j));
+                }
+            }
+        }
+        return res;
+    }
+    public static int dfsMaxArea(int[][] graph, int row, int col){
+        if(row < 0 || row >= graph.length || col < 0 || col >= graph[0].length) return 0;
+        if(graph[row][col] == 0 || graph[row][col] == 2) return 0;
+        graph[row][col] = 2;
+        return 1 + dfsMaxArea(graph,row-1,col) + dfsMaxArea(graph,row+1,col) + dfsMaxArea(graph,row,col-1) + dfsMaxArea(graph,row,col+1);
+    }
     //find num of land
 
     public static void main(String[] args) {
-        int[][] matrix = new int[][]{{1,0,3},{4,5,6},{7,8,9}};
-        setZeroInPlace(matrix);
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                System.out.print(matrix[i][j]);
-            }
-        }
+        int[][] map = new int[][]{{1,0,1},{1,0,1},{0,1,0}};
+        System.out.println(maxArea(map));
     }
 }
