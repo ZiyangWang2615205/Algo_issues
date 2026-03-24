@@ -78,10 +78,34 @@ public class Review {
         graph[row][col] = 2;
         return 1 + dfsMaxArea(graph,row-1,col) + dfsMaxArea(graph,row+1,col) + dfsMaxArea(graph,row,col-1) + dfsMaxArea(graph,row,col+1);
     }
+
     //find num of land
+    public static int landsNum(int[][] graph){
+        if(graph.length == 0) return 0;
+        int count = 0;
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = 0; j < graph[0].length; j++) {
+                if(dfsLandsNum(graph,i,j)){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+    public static boolean dfsLandsNum(int[][] graph, int row, int col){
+        if(row < 0 || row >= graph.length || col < 0 || col >= graph[0].length) return false;
+        if(graph[row][col] == 0 || graph[row][col] == 2) return false;
+        graph[row][col] = 2;
+        //fill lands
+        dfsLandsNum(graph,row-1,col);
+        dfsLandsNum(graph,row+1,col);
+        dfsLandsNum(graph,row,col-1);
+        dfsLandsNum(graph,row,col+1);
+        return true;
+    }
 
     public static void main(String[] args) {
         int[][] map = new int[][]{{1,0,1},{1,0,1},{0,1,0}};
-        System.out.println(maxArea(map));
+        System.out.println(landsNum(map));
     }
 }
