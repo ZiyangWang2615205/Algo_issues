@@ -288,30 +288,6 @@ public class Solution {
         return res;
     }
 
-    //pour the same color which value equal to  image[sr][sc]
-    public static int[][] fill(int[][] image, int sr, int sc, int color){
-        if(image.length == 0) return new int[][]{};
-        int prev = image[sr][sc];
-        //if color = prev do not need to fill
-        if(prev != color){
-            dfsFill(image,sr,sc,color,prev);
-        }
-        return image;
-    }
-    public static void dfsFill(int[][] image, int row, int column, int color, int prev){
-        //boundary
-        //over edge
-        if(row < 0 || row >= image.length || column < 0 || column >= image[0].length) return;
-        //covered with color or another color
-        if(image[row][column] == color || image[row][column] != prev) return;
-        //label current
-        image[row][column] = color;
-        //recursion label
-        dfsFill(image, row-1, column, color, prev);
-        dfsFill(image, row+1, column, color, prev);
-        dfsFill(image, row, column-1, color, prev);
-        dfsFill(image, row, column+1, color, prev);
-    }
     public static void main(String[] args) {
         int[][] matrix = new int[][]{{1,0,3},{8,9,4},{7,6,5}};
         //1.check clockwise
