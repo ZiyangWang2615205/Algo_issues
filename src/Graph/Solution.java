@@ -1,5 +1,6 @@
 package Graph;
 
+import javax.swing.plaf.IconUIResource;
 import java.util.*;
 
 public class Solution {
@@ -288,6 +289,25 @@ public class Solution {
         return res;
     }
 
+    //Fill the region starting from (sr, sc)
+    //Replace all cells with the same color as the starting point, and all cells with the same color as the starting point,
+    //with the new color, and return the modified image.
+    public static void recoloured(int[][] image, int sr, int sc, int alternateColour){
+        if(image.length == 0) return;
+        int start = image[sr][sc];
+        if(start != alternateColour){
+            dfsRecoloured(image,sr,sc,alternateColour,start);
+        }
+    }
+    public static void dfsRecoloured(int[][]image, int row, int col, int colour, int original){
+        if(row < 0 || row >= image.length || col < 0 || col >= image[0].length) return;
+        if(image[row][col] == colour || image[row][col] != original) return;
+        image[row][col] = colour;
+        dfsRecoloured(image,row-1,col,colour,original);
+        dfsRecoloured(image,row+1,col,colour,original);
+        dfsRecoloured(image,row,col-1,colour,original);
+        dfsRecoloured(image,row,col+1,colour,original);
+    }
     public static void main(String[] args) {
         int[][] matrix = new int[][]{{1,0,3},{8,9,4},{7,6,5}};
         //1.check clockwise
@@ -313,5 +333,6 @@ public class Solution {
         //8.find the word in charBoard
         System.out.println("The word in board");
         System.out.println(findWord(new char[][]{{'a','b','c'},{'d','e','f'},{'g','h','j'}},"abehj"));
+        //9.filled colour
     }
 }
