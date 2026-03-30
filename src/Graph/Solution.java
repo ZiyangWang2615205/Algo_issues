@@ -6,10 +6,9 @@ import java.util.*;
 public class Solution {
     //print line and line
     public static void printMatrix(int[][] matrix){
-        if(matrix.length == 0) return;
-        List<int[]> layer = new ArrayList<>();
-        layer.addAll(Arrays.asList(matrix));
-        System.out.println(layer);
+        for(int[] row : matrix){
+            System.out.println(Arrays.toString(row));
+        }
     }
     //clockwise_print
     public static List<Integer> spiralOrder(int[][] matrix){
@@ -343,5 +342,6 @@ public class Solution {
         //9.filled colour
         int[][] colourBoard = new int[][]{{1,1,1},{1,1,0},{1,0,1}};
         recoloured(colourBoard,1,1,2);
+        printMatrix(colourBoard);
     }
 }
