@@ -334,5 +334,7 @@ public class Solution {
         System.out.println("The word in board");
         System.out.println(findWord(new char[][]{{'a','b','c'},{'d','e','f'},{'g','h','j'}},"abehj"));
         //9.filled colour
+        int[][] colourBoard = new int[][]{{1,1,1},{1,1,0},{1,0,1}};
+        recoloured(colourBoard,1,1,2);
     }
 }
