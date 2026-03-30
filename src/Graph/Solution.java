@@ -4,6 +4,13 @@ import javax.swing.plaf.IconUIResource;
 import java.util.*;
 
 public class Solution {
+    //print line and line
+    public static void printMatrix(int[][] matrix){
+        if(matrix.length == 0) return;
+        List<int[]> layer = new ArrayList<>();
+        layer.addAll(Arrays.asList(matrix));
+        System.out.println(layer);
+    }
     //clockwise_print
     public static List<Integer> spiralOrder(int[][] matrix){
         if(matrix.length == 0) return new ArrayList<>();
