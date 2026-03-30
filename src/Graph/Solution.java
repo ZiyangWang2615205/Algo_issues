@@ -318,7 +318,7 @@ public class Solution {
         int[][] matrix = new int[][]{{1,0,3},{8,9,4},{7,6,5}};
         //1.check clockwise
         System.out.println("spiralOrder: ");
-        System.out.print(spiralOrder(matrix));
+        System.out.println(spiralOrder(matrix));
         //2.search target in incremental matrix
         int[][] increment = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
         System.out.print("search target: ");
@@ -334,14 +334,18 @@ public class Solution {
         System.out.print("max land area: ");
         System.out.println(maxLandArea(new int[][]{{1, 0, 1}, {0, 0, 0}, {0, 0, 1}}));
         //7.check land num
-        System.out.println("num of land: ");
+        System.out.print("num of land: ");
         System.out.println(numOfLand(new int[][]{{1,0,1},{0,0,0},{0,0,1}}));
         //8.find the word in charBoard
-        System.out.println("The word in board");
+        System.out.print("The word in board: ");
         System.out.println(findWord(new char[][]{{'a','b','c'},{'d','e','f'},{'g','h','j'}},"abehj"));
         //9.filled colour
+        System.out.println("filled coloured:");
+        System.out.println("before:");
         int[][] colourBoard = new int[][]{{1,1,1},{1,1,0},{1,0,1}};
+        printMatrix(colourBoard);
         recoloured(colourBoard,1,1,2);
+        System.out.println("after:");
         printMatrix(colourBoard);
     }
 }
