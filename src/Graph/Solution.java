@@ -315,9 +315,26 @@ public class Solution {
         dfsRecoloured(image,row,col+1,colour,original);
     }
 
-    //calc perimeter of land
+    //calc perimeter of land, there is only one land in graph
     public static int perimeterOfLand(int[][] graph){
-
+        if(graph.length == 0) return 0;
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = 0; j < graph[0].length; j++) {
+                if(graph[i][j] == 1){
+                    return dfsPerimeter(graph,i,j);
+                }
+            }
+        }
+        return 0;
+    }
+    public static int dfsPerimeter(int[][] graph, int row, int col){
+        //boundary land
+        if(row < 0 || row >= graph.length || col < 0 || col >= graph[0].length) return 1;
+        //the land next to sea
+        if(graph[row][col] == 0) return 1;
+        if(graph[row][col] == 2) return 0;
+        graph[row][col] = 2;
+        return dfsPerimeter(graph,row-1,col)+dfsPerimeter(graph,row+1,col)+dfsPerimeter(graph,row,col-1)+dfsPerimeter(graph,row,col+1);
     }
     public static void main(String[] args) {
         int[][] matrix = new int[][]{{1,0,3},{8,9,4},{7,6,5}};
