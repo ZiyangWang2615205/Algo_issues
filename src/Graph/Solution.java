@@ -369,5 +369,7 @@ public class Solution {
         recoloured(colourBoard,1,1,2);
         System.out.println("after:");
         printMatrix(colourBoard);
+        //10.perimeter of land
+        System.out.println(perimeterOfLand(new int[][]{{0,1,0,0},{1,1,1,0},{0,1,0,0},{0,1,0,0}}));
     }
 }
