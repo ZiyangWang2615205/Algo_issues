@@ -314,6 +314,11 @@ public class Solution {
         dfsRecoloured(image,row,col-1,colour,original);
         dfsRecoloured(image,row,col+1,colour,original);
     }
+
+    //calc perimeter of land
+    public static int perimeterOfLand(int[][] graph){
+
+    }
     public static void main(String[] args) {
         int[][] matrix = new int[][]{{1,0,3},{8,9,4},{7,6,5}};
         //1.check clockwise
