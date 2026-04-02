@@ -104,8 +104,27 @@ public class Review {
         return true;
     }
 
+    public static int perimeter(int[][] graph){
+        if(graph.length == 0) return 0;
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = 0; j < graph[0].length; j++) {
+                if(graph[i][j] == 1){
+                    return dfsPerimeterLand(graph,i,j);
+                }
+            }
+        }
+        return 0;
+    }
+    public static int dfsPerimeterLand(int[][] graph, int row, int col){
+        if(row < 0 || col < 0 || row >= graph.length || col >= graph[0].length) return 1;
+        if(graph[row][col] == 0) return 1;
+        if(graph[row][col] == -1) return 0;
+        graph[row][col] = -1;
+        return dfsPerimeterLand(graph,row-1,col) + dfsPerimeterLand(graph,row+1,col) + dfsPerimeterLand(graph,row,col-1) + dfsPerimeterLand(graph,row,col+1);
+    }
     public static void main(String[] args) {
         int[][] map = new int[][]{{1,0,1},{1,0,1},{0,1,0}};
         System.out.println(landsNum(map));
+        System.out.println(perimeter(new int[][]{{0,1,0,0},{1,1,1,0},{0,1,0,0},{0,1,0,0}}));
     }
 }
