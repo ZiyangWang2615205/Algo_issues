@@ -334,6 +334,49 @@ input为一个graph，其中sea用0代表，land用1代表，要求返回land的
 
 ---
 ### `findword`
+**PS:** 此题目略微涉及backtrack，可以完成backtrack基础题目后再来做。
+
+在一个字符板中找到制定的word，且必须是该路径必须都是相邻的，比如找apple，最终找到的路径中，储存a的格子必须与p的格子相邻。
+因此方法也很简单，只需要找到首字母所在的格子然后进入dfs即可。
+同时要记录word的长度和访问过的element，方便判断当前路径是否valid。
+```java
+//find the word in a char board (the char should be adjacent to others)
+    public static boolean findWord(char[][] charBoard, String word){
+        if(charBoard.length == 0) return false;
+        //used record accessed element
+        boolean[][] accessed = new boolean[charBoard.length][charBoard[0].length];
+        for (int i = 0; i < charBoard.length; i++) {
+            for (int j = 0; j < charBoard[0].length; j++) {
+                if(dfsFindWord(charBoard,word,accessed,i,j,0)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public static boolean dfsFindWord(char[][] charBoard, String word, boolean[][] accessed, int row, int col, int index){
+        //terminal
+        if(index == word.length()) return true;
+        //boundary
+        if(row < 0 || row >= charBoard.length || col < 0 || col >= charBoard[0].length) return false;
+        if(accessed[row][col] || charBoard[row][col] != word.charAt(index)) return false;
+        //label
+        accessed[row][col] = true;
+        boolean res = dfsFindWord(charBoard,word,accessed,row-1,col,index+1) ||
+                      dfsFindWord(charBoard,word,accessed,row+1,col,index+1) ||
+                      dfsFindWord(charBoard,word,accessed,row,col-1,index+1) ||
+                      dfsFindWord(charBoard,word,accessed,row,col+1,index+1);
+        //backtrack label
+        accessed[row][col] = false;
+        return res;
+    }
+```
+**time**-complexity: **O(mn)**
+
+**space**-complexity: **O(mn)**
+
+---
+### ``
 
 ---
 ## 3. Backtrack Used Questions
