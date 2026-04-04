@@ -123,42 +123,6 @@ public class Review {
         return dfsPerimeterLand(graph,row-1,col) + dfsPerimeterLand(graph,row+1,col) + dfsPerimeterLand(graph,row,col-1) + dfsPerimeterLand(graph,row,col+1);
     }
 
-    //pour water
-    public static boolean existWater(int container_A, int container_B, int target){
-        if(target == 0) return true;
-        return dfsExistWater(container_A,0,container_B,0,target);
-    }
-    public static boolean dfsExistWater(int container_A, int current_A, int container_B, int current_B, int target){
-        //boundary
-        if(current_A > container_A || current_B > container_B) return false;
-        //terminal
-        if(current_A == target || current_B == target) return true;
-        //container A full of water
-        boolean fullA = dfsExistWater(container_A,container_A,container_B,current_B,target);
-        //container B full of water
-        boolean fullB = dfsExistWater(container_A,current_A,container_B,container_B,target);
-
-        //A -> B
-        if(current_A + current_B <= container_B){
-            current_B += current_A;
-            boolean clearA =  dfsExistWater(container_A,0,container_B,current_B,target);
-        }
-        if(current_A + current_B > container_B){
-            int diff = container_B - current_B;
-            boolean AToB = dfsExistWater(container_A,current_A-diff,container_B,container_B,target);
-        }
-
-        //B -> A
-        if(current_A + current_B <= container_A){
-            current_A += current_B;
-            boolean clearB =  dfsExistWater(container_A,current_A,container_B,0,target);
-        }
-        if(current_A + current_B > container_A){
-            int diff = container_A - current_A;
-            boolean BToA = dfsExistWater(container_A,container_A,container_B,current_B-diff,target);
-        }
-
-    }
     public static void main(String[] args) {
         int[][] map = new int[][]{{1,0,1},{1,0,1},{0,1,0}};
         System.out.println(landsNum(map));
