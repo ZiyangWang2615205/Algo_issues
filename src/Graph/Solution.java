@@ -339,7 +339,7 @@ public class Solution {
 
     public static boolean pourWater(int vm, int vn, int target){
         if(target == 0) return true;
-        boolean[][] accessed = new boolean[vm][vn];
+        boolean[][] accessed = new boolean[vm+1][vn+1];
         return dfsPourWater(vm,vn,0,0,accessed,target);
     }
     public static boolean dfsPourWater(int vm, int vn, int cm, int cn, boolean[][] accessed, int target){
@@ -358,10 +358,10 @@ public class Solution {
             // N -> M
             if(cn > 0){
                 int diff = vm - cm;
-                cm += Integer.min(diff,cn);
-                cn -= Integer.min(diff,cn);
-                if(dfsPourWater(vm,vn,cm,cn,accessed,target)){
-                    System.out.println("Transfer N to M: " + cm + " " + cn);
+                int newCm = cm + Integer.min(diff,cn);
+                int newCn = cn - Integer.min(diff,cn);
+                if(dfsPourWater(vm,vn,newCm,newCn,accessed,target)){
+                    System.out.println("Transfer N to M: " + newCm + " " + newCn);
                     return true;
                 }
             }
@@ -370,22 +370,23 @@ public class Solution {
         if(cm > 0){
             if(dfsPourWater(vm,vn,0,cn,accessed,target)){
                 System.out.println("Empty M: " + 0 + " " + cn);
+                return true;
             }
         }
 
         if(cn < vn){
             // fill container N
             if(dfsPourWater(vm,vn,cm,vn,accessed,target)){
-                System.out.println("Fill container M: " + cm + " " + vn);
+                System.out.println("Fill container N: " + cm + " " + vn);
                 return true;
             }
             // M -> N
             if(cm > 0){
                 int diff = vn - cn;
-                cn += Integer.min(diff,cm);
-                cm -= Integer.min(diff,cm);
-                if(dfsPourWater(vm,vn,cm,cn,accessed,target)){
-                    System.out.println("Transfer M to N: " + cm + " " + cn);
+                int newCn = cn + Integer.min(diff,cm);
+                int newCm = cm - Integer.min(diff,cm);
+                if(dfsPourWater(vm,vn,newCm,newCn,accessed,target)){
+                    System.out.println("Transfer M to N: " + newCm + " " + newCn);
                     return true;
                 }
             }
@@ -393,7 +394,8 @@ public class Solution {
         //empty container M
         if(cn > 0){
             if(dfsPourWater(vm,vn,cm,0,accessed,target)){
-                System.out.println("Empty M: " + cm + " " + 0);
+                System.out.println("Empty N: " + cm + " " + 0);
+                return true;
             }
         }
         return false;
@@ -434,5 +436,9 @@ public class Solution {
         printMatrix(colourBoard);
         //10.perimeter of land
         System.out.println(perimeterOfLand(new int[][]{{0,1,0,0},{1,1,1,0},{0,1,0,0},{0,1,0,0}}));
+        //11. pour water
+        if(pourWater(3,5,4)){
+            System.out.println("true");
+        }
     }
 }
