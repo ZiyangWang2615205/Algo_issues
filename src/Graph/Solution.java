@@ -337,6 +337,7 @@ public class Solution {
         return dfsPerimeter(graph,row-1,col)+dfsPerimeter(graph,row+1,col)+dfsPerimeter(graph,row,col-1)+dfsPerimeter(graph,row,col+1);
     }
 
+    //given volumes of two container, to figure out whether they could gain target volume of water
     public static boolean pourWater(int vm, int vn, int target){
         if(target == 0) return true;
         boolean[][] accessed = new boolean[vm+1][vn+1];
@@ -349,6 +350,7 @@ public class Solution {
         //terminate
         if(cm == target || cn == target) return true;
 
+        //deal with M
         if(cm < vm){
             // fill container M
             if(dfsPourWater(vm,vn,vm,cn,accessed,target)){
@@ -374,6 +376,7 @@ public class Solution {
             }
         }
 
+        //deal with N
         if(cn < vn){
             // fill container N
             if(dfsPourWater(vm,vn,cm,vn,accessed,target)){
