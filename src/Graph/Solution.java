@@ -336,6 +336,69 @@ public class Solution {
         graph[row][col] = 2;
         return dfsPerimeter(graph,row-1,col)+dfsPerimeter(graph,row+1,col)+dfsPerimeter(graph,row,col-1)+dfsPerimeter(graph,row,col+1);
     }
+
+    public static boolean pourWater(int vm, int vn, int target){
+        if(target == 0) return true;
+        boolean[][] accessed = new boolean[vm][vn];
+        return dfsPourWater(vm,vn,0,0,accessed,target);
+    }
+    public static boolean dfsPourWater(int vm, int vn, int cm, int cn, boolean[][] accessed, int target){
+        //if it has been accessed, passed it
+        if(accessed[cm][cn]) return false;
+        accessed[cm][cn] = true;
+        //terminate
+        if(cm == target || cn == target) return true;
+
+        if(cm < vm){
+            // fill container M
+            if(dfsPourWater(vm,vn,vm,cn,accessed,target)){
+                System.out.println("Fill container M: " + vm + " " + cn);
+                return true;
+            }
+            // N -> M
+            if(cn > 0){
+                int diff = vm - cm;
+                cm += Integer.min(diff,cn);
+                cn -= Integer.min(diff,cn);
+                if(dfsPourWater(vm,vn,cm,cn,accessed,target)){
+                    System.out.println("Transfer N to M: " + cm + " " + cn);
+                    return true;
+                }
+            }
+        }
+        //empty container M
+        if(cm > 0){
+            if(dfsPourWater(vm,vn,0,cn,accessed,target)){
+                System.out.println("Empty M: " + 0 + " " + cn);
+            }
+        }
+
+        if(cn < vn){
+            // fill container N
+            if(dfsPourWater(vm,vn,cm,vn,accessed,target)){
+                System.out.println("Fill container M: " + cm + " " + vn);
+                return true;
+            }
+            // M -> N
+            if(cm > 0){
+                int diff = vn - cn;
+                cn += Integer.min(diff,cm);
+                cm -= Integer.min(diff,cm);
+                if(dfsPourWater(vm,vn,cm,cn,accessed,target)){
+                    System.out.println("Transfer M to N: " + cm + " " + cn);
+                    return true;
+                }
+            }
+        }
+        //empty container M
+        if(cn > 0){
+            if(dfsPourWater(vm,vn,cm,0,accessed,target)){
+                System.out.println("Empty M: " + cm + " " + 0);
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         int[][] matrix = new int[][]{{1,0,3},{8,9,4},{7,6,5}};
         //1.check clockwise
